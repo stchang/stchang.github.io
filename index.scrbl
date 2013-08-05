@@ -1,4 +1,4 @@
 #lang scribble/base
 
 @title{My Racket blog}
-@hyperlink["implementing-views-with-match-expanders.html"]{Views}
+@hyperlink["implementing-views-with-match-expanders.html"]{Implementing views with match expanders}
