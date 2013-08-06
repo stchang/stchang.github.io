@@ -5,7 +5,7 @@
 
 @(show-date)
 
-@title{Resolving the tension between ADTs and pattern matching with match expanders in Racket.}
+@title{ADTs vs pattern matching: resolving tension with match expanders in Racket.}
 
 @lp-include{adts-vs-pattern-matching.scrbl}
 
