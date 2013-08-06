@@ -5,8 +5,8 @@
 
 @(show-date)
 
-@title{Implementing views with match expanders in Racket}
+@title{Resolving the tension between ADTs and pattern matching with match expanders in Racket.}
 
-@lp-include{implementing-views-with-match-expanders.scrbl}
+@lp-include{adts-vs-pattern-matching.scrbl}
 
 @disqus{views}

@@ -1,6 +1,8 @@
 #lang scribble/lp
 
-Programmers frequently employ both abstract data types and pattern matching. Unfortunately, the two are often at odds with each other. This short post shows how @tech{match expanders} in Racket provide an easy solution to the problem.
+Programmers regularly employ both abstract data types and pattern matching. Unfortunately, the two are often at odds with each other. This short post shows how @tech{match expanders} in Racket provide an easy solution to the problem.
+
+@section{A functional queue}
 
 Consider this functional queue @cite{pfds}, implemented with an @racket[internal-queue] structure containing two lists, a front list and a rear list.
     
@@ -34,7 +36,11 @@ Consider this functional queue @cite{pfds}, implemented with an @racket[internal
 
 The @racket[enqueue] function adds an element to the rear of the queue while @racket[head] and @racket[tail] get and remove, respectively, an element from the front. When the front list is empty, as checked by @racket[checkf], then the rear list is reversed and set as the new front list and the rear list is reset to empty.
     
+@section{The Problem}
+
 Now say the queue implementer wants to represent the queue as an abstract data type and @racket[provide]s only @racket[empty-queue], @racket[enqueue], @racket[head], and @racket[tail] as the interface to the queue. The problem is that a user of the queue cannot employ pattern matching anymore. The implementer could additionally provide the @racket[internal-queue] structure, but this would leak the internal representation of the queue.
+
+@section{A Solution}
 
 Traditionally, language implementers have resolved this tension between abstract data types and pattern matching with views @cite["wadler" "okasaki"]. In Racket, @tech{match expanders} elegantly to achieve the same goal.
 
@@ -72,13 +78,17 @@ To take it one step further, we can use Racket's macros to define a new @racket[
           (check-equal? h 200)
           (check-true (queue-empty? t))])]
     
+@section{An optimization}
+
+@section{Conclusion}
+
   @chunk[<*>
          (require racket rackunit)
          <queue>
          <queue-match-expander>
          <define-view>]
   
-  @(bibliography
+@(bibliography
   (bib-entry #:key "wadler"
              #:author "Philip Wadler"
              #:title "Views: A way for pattern matching to cohabit with data abstraction"
