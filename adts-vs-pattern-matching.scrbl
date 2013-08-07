@@ -42,7 +42,7 @@ Now say the queue implementer wants to represent the queue as an abstract data t
 
 @section{A Solution}
 
-Traditionally, language implementers have resolved this tension between abstract data types and pattern matching with views @cite["wadler" "okasaki"]. In Racket, @tech{match expanders} elegantly to achieve the same goal.
+Traditionally, language implementers have resolved this tension between abstract data types and pattern matching with views @cite["wadler" "okasaki"]. In Racket, @tech{match expanders} achieve the same goal.
 
 Say I want to match the following pattern:
     

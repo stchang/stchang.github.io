@@ -6,6 +6,8 @@
 
 (provide (all-defined-out))
 
+(define (home-link) (hyperlink "index.html" "back"))
+
 (define (show-date)
   (parameterize ([date-display-format 'rfc2822])
     (margin-note (emph "Last updated:") (linebreak) (date->string (current-date)))))
@@ -29,7 +31,7 @@
     
 (define DISQUS_SHORTNAME "stchanggithub")
 
-(define (disqus post-id)
+(define (add-disqus post-id)
   (element
    (style #f (list (alt-tag "div")
                    (attributes
@@ -40,7 +42,7 @@
       (script-property
        "text/javascript"
        (list (format "var disqus_shortname = '~a';\n" DISQUS_SHORTNAME)
-             (format "var disqus_identifier = '~a';\n" post-id)
+;             (format "var disqus_identifier = '~a';\n" post-id)
 ;             "var disqus_script = 'embed.js';\n"
              "(function () {\n"
              "var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;\n"
