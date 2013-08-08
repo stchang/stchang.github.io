@@ -13,4 +13,7 @@
 @lp-include{adts-vs-pattern-matching.scrbl}
 
 @section[#:style @(list 'hidden 'unnumbered)]{}
+
 @add-disqus{adts-vs-match}
+
+@(add-google-analytics)

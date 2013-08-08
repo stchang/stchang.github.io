@@ -12,6 +12,64 @@
   (parameterize ([date-display-format 'rfc2822])
     (margin-note (emph "Last updated:") (linebreak) (date->string (current-date)))))
 
+;; google analytics -----------------------------------------------------------
+
+;; from google:
+;<script type="text/javascript">
+;
+;  var _gaq = _gaq || [];
+;  _gaq.push(['_setAccount', 'UA-43068115-1']);
+;  _gaq.push(['_trackPageview']);
+;
+;  (function() {
+;    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+;    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+;    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+;  })();
+;
+;</script>
+
+(define GA-ACCOUNT "UA-43068115-1")
+
+(define (add-google-analytics)
+  (element
+    (style #f
+     (list
+      (script-property
+       "text/javascript"
+       (list 
+        "var _gaq = _gaq || [];\n"
+        (format "_gaq.push(['_setAccount', '~a']);\n" GA-ACCOUNT)
+        "_gaq.push(['_trackPageview']);\n"
+        "(function() {\n"
+        "var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;\n"
+        "ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';\n"
+        "var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);\n"
+        "})();\n"))))
+    (list)))
+
+;(define (add-google-analytics . more)
+;  (style #f
+;    (append more
+;            (list
+;             (head-extra
+;              `(link ([href "atom.xml"]
+;                      [rel "alternate"]
+;                      [title ,*BLOG-TITLE*]
+;                      [type "application/atom+xml"])))
+;             (head-extra
+;              `(script ([type "text/javascript"])
+;                       ,(format "var _gaq = _gaq || [];
+;    _gaq.push(['_setAccount', '~a']);
+;    _gaq.push(['_trackPageview']);
+;
+;    (function() {
+;      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+;      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+;      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+;    })();"
+;                                *BLOG-GA-ACCOUNT*)))))))
+
 ;; disqus ---------------------------------------------------------------------
 
 ;<div id="disqus_thread"></div>
