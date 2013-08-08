@@ -1,4 +1,14 @@
-2013-08-08
+******** 2013-08-08 ********
+- to compile with linked xrefs:
+
+scribble --html ++xref-in setup/xref load-collections-xref --redirect-main "http://docs.racket-lang.org/" adts-vs-pattern-matching.rkt
+
+Other notes:
+- --redirect-main seems to get ignored without --html
+- can't figure out how to linkify @tech{}'s
+
+
+******** 2013-08-07 ********
 - without sections, disqus appears before bibliography, even though the code is
   after
 - with section, disqus does not appear
