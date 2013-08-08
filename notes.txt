@@ -1,0 +1,5 @@
+2013-08-08
+- without sections, disqus appears before bibliography, even though the code is
+  after
+- with section, disqus does not appear
+- after adding an extra section for disqus, it appears after bibliography

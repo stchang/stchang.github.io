@@ -3,11 +3,12 @@
 @(require scribble/lp-include)
 @require{utils.rkt}
 
+@title{ADTs vs Pattern Matching}
+@italic{Resolving the tension with match expanders in Racket.}
+
 @(home-link)
 
 @(show-date)
-
-@title{ADTs vs pattern matching: resolving tension with match expanders in Racket.}
 
 @lp-include{adts-vs-pattern-matching.scrbl}
 
