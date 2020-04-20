@@ -1,0 +1,47 @@
+<!--?xml version="1.0" encoding="iso-8859-1"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Laziness By Need</title>
+<meta name="Author" content="Stephen Chang">
+<meta name="Description" content="">
+
+<link rel="stylesheet" href="../front.css">
+</head>
+<body>
+<div id="contents">
+<div class="box">
+
+<p><span style="font-weight: bold;">Laziness By Need</span>.<br>Stephen Chang.<br>
+
+<em>22nd European Symposium on Programming (ESOP 2013)</em>, Rome, Italy, March 2013.<br>
+
+</vr></p>
+
+<p>
+[&nbsp;<a href="../pubs/Chang-ESOP2013.pdf">PDF</a>&nbsp;]
+</p>
+
+<blockquote>
+<p>
+Lazy functional programming has many benefits that strict functional languages
+ can simulate via lazy data constructors. In recognition, ML, Scheme, and other
+ strict functional languages have supported lazy stream programming with
+ <code>delay</code> and <code>force</code> for several decades. Unfortunately, the manual insertion
+ of <code>delay</code> and <code>force</code> can be tedious and error-prone.
+ </p><p>
+We present a semantics-based refactoring that helps strict programmers manage
+ manual lazy programming. The refactoring uses a static analysis to identify
+ where additional <code>delay</code>s and <code>force</code>s might be needed
+ to achieve the desired simplification and performance benefits, once the
+ programmer has added the initial lazy data constructors. The paper presents a
+ correctness argument for the underlying transformations and some preliminary
+ experiences with a prototype tool implementation.
+</p>
+</blockquote>
+
+</div>
+<br><br>
+<a href="/home/stchang">Home</a>
+</div>
+</body></html>

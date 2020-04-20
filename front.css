@@ -1,0 +1,152 @@
+@font-face {
+font-family: FiraSans;
+src: url(/FiraSans-Regular.otf);
+}
+
+html { 
+  color: black; 
+  text-align: left;
+  font-family: centaur, baskerville, garamond, "times new roman", times, serif;
+}
+
+body {
+/*  background-image: url('tree.png'); */
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+}
+
+ul {
+ list-style: circle;
+}
+
+dl,dt,ul { 
+/*  color: black; */
+/*  font-size: small; */
+  text-align: left;
+  margin-right: 1cm;
+}
+
+P {
+  text-align: justify;
+/*  color: black; */
+/*  font-size: large; */
+/*  font-family: Arial, Helvetica, sans-serif;   */
+  font-family: FiraSans, Arial, Helvetica, sans-serif;
+}
+
+a {
+  /* color: #CC0033; */
+  /* color: #3F65AE; */
+  /* color : #cc0000; */
+  color: #880308;
+  /* color : #f30007; */
+  text-decoration: none;
+}
+
+.feed-icon {
+  float: right;
+}
+
+.validator-link {
+  font-family: Arial, Helvetica, times, serif; 
+  font-size: 0.8em;
+}
+
+img {
+  border: 0px;
+}
+
+A:visited {
+  
+}
+
+A:link {
+
+}
+
+A:hover {
+  text-decoration: underline;
+}
+
+.menu, .submenu {
+  font-family: Arial, Helvetica, sans-serif;  
+}
+
+.menu {
+  font-size: 12px; 
+  border-bottom: 1px solid #52547a;
+}
+
+.submenu {
+  text-align: right; 
+  font-size: 10px; 
+}
+
+P.emph2 {
+  border: 1px solid black;
+  padding: 10px;
+  background: url('pattern26.gif') repeat;
+}
+
+HR {
+  border: 1px solid #880308;
+  /* border: 1px solid #f30007; */
+  /* background-color: #3F65AE; */
+
+}
+
+P.emph {
+  color: white; 
+  border: 1px solid black;
+  padding: 10px;
+  background-color: #3F65AE;
+/* background: url('1960_dots.gif') repeat;  */
+}
+
+A.emph {
+  color: white;
+  font-style: italic;
+}
+
+A.emph:visited {
+  color: white;
+}
+
+A.bold {
+  font-weight: bold;
+  font-size: large;
+}
+
+DIV.abstract {
+  margin-left: 1in;
+  margin-right: 1in;
+}
+
+
+.box {
+    padding: 0px 0px;
+/*    background-color: #fff; */
+}
+
+#contents {
+    width: 71%;
+    margin: auto;
+}
+
+#topcontents {
+    width: 71%;
+    margin: auto;
+}
+
+.paper-title {
+  font-weight: bold;
+}
+
+.paper-venue {
+  font-style: italic;
+}
+
+h1 {
+  margin: 0;
+}
+

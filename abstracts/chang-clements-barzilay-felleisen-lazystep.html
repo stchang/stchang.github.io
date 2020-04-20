@@ -1,0 +1,61 @@
+<!--?xml version="1.0" encoding="iso-8859-1"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>From Stack Traces to Lazy Rewriting Sequences</title>
+<meta name="Author" content="Stephen Chang">
+<meta name="Description" content="">
+
+<link rel="stylesheet" href="../front.css">
+</head>
+<body>
+<div id="contents">
+<div class="box">
+
+<p><span style="font-weight: bold;">From Stack Traces to Lazy Rewriting Sequences</span>.<br>Stephen Chang, John Clements, Eli Barzilay, and Matthias
+Felleisen.<br>
+
+<em>pre-print</em>.<br>
+
+</vr></p>
+
+<p>
+[&nbsp;<a href="">PDF</a>&nbsp;]
+</p>
+
+<blockquote>
+<p>
+Debugging lazy functional programs poses serious challenges. Due to the
+ complicated nature of lazy evaluation, some debugging tools abandon laziness
+ altogether. Other debuggers preserve laziness but present it in a way that may
+ confuse programmers because the focus of evaluation jumps around in a
+ seemingly random manner.
+</p><p>
+In this paper, we introduce the algebraic program stepper as a new debugging
+ tool for lazy programs. We conjecture that our tool is suitable for clarifying
+ the confusing nature of laziness. Preliminary classroom experiences have
+ confirmed a prototype implementation of the stepper as a useful tool for
+ novice programmers and programmers new to lazy programming.
+</p><p>
+Mathematically speaking, our stepper renders lazy computations as the standard
+ rewriting sequences of a program rewriting system. Our lazy semantics
+ introduces lazy evaluation as a form of parallel program rewriting. The
+ semantics resembles graph reduction but remains intuitive for programmers
+ because it emphasizes the source syntax. As a <em>syntactic semantics</em>,
+ our rewriting system represents a compromise between Launchbury's store-based
+ semantics and a simple, axiomatic description of lazy computation as
+ sharing-via-parameters.  We prove an equivalence between our system and both
+ of these semantics.
+</p><p>
+The stepper's implementation leverages Racket's continuation marks for stack
+ trace generation. We can therefore exploit existing models of continuation
+ marks and a correctness proof of Racket's eager algebraic stepper to prove the
+ correctness of our lazy stepper.
+</p>
+</blockquote>
+
+</div>
+<br><br>
+<a href="/home/stchang">Home</a>
+</div>
+</body></html>

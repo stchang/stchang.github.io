@@ -1,0 +1,120 @@
+<!--?xml version="1.0" encoding="iso-8859-1"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Type Systems as Macros</title>
+<meta name="Author" content="Stephen Chang">
+<meta name="Description" content="">
+
+<link rel="stylesheet" href="../front.css">
+</head>
+<body>
+<div id="contents">
+<div class="box">
+
+<img src="logo.png" width=128>
+<p><span style="font-weight: bold;">Type Systems as Macros</span>.<br>Stephen Chang, Alex Knauth, Ben Greenman.<br>
+
+<a href="http://conf.researchr.org/home/POPL-2017"><em>44th ACM SIGPLAN Symposium on Principles of Programming Languages (POPL)</em></a>, Paris, France, January 18-20, 2017 (to appear).<br/>
+
+</vr></p>
+
+<p>
+  [&nbsp;<a href="http://www.ccs.neu.edu/home/stchang/pubs/ckg-popl2017.pdf">pdf</a>&nbsp;
+  |&nbsp;<a href="https://bitbucket.org/stchang/macrotypes">code repo</a>&nbsp;
+  |&nbsp;<a href="#artifact">artifact instructions</a>, <a href="http://www.ccs.neu.edu/home/stchang/popl2017/type-systems-as-macros.ova">VirtualBox image</a> (2.1GB)&nbsp;]
+</p>
+
+<blockquote>
+<p>
+We present Turnstile, a metalanguage for creating typed embedded languages. To
+implement the type system, programmers write type checking rules resembling
+traditional judgment syntax. To implement the semantics, they incorporate
+elaborations into these rules. Turnstile critically depends on the idea of
+linguistic reuse. It exploits a <i>macro system</i> in a novel way to
+<i>simultaneously</i> type check and rewrite a surface program into a target
+language. Reusing a macro system also yields modular implementations whose
+rules may be mixed and matched to create other languages. Combined with typical
+compiler and runtime reuse, Turnstile produces performant typed embedded
+languages with little effort.
+</p>
+</blockquote>
+</div>
+<div class="box">
+  <em>Links to runnable versions of examples from the paper:</em>
+<br>
+    <ul>
+  <li><a href="https://bitbucket.org/stchang/macrotypes/src/b2e4fc3033f6bd5cbbe738fa746f87dfe074e0ab/macrotypes/examples/popl2017/?at=popl2017-artifact">code examples from sections 1-5</a>
+  <li><a href="https://bitbucket.org/stchang/macrotypes/src/384e4962cd9d7f6a40c4d78636abda00fd029665/turnstile/examples/mlish.rkt?at=master&fileviewer=file-view-default">MLish implementation without typeclasses</a>
+    <ul>
+  <li><a href="https://bitbucket.org/stchang/macrotypes/src/384e4962cd9d7f6a40c4d78636abda00fd029665/turnstile/examples/tests/mlish/?at=master">examples and tests</a>
+    </ul>
+  <li><a href="https://bitbucket.org/stchang/macrotypes/src/362b0f310d9dddfa4cd562a9d08c692a87c401a6/turnstile/examples/mlish+adhoc.rkt?at=master&fileviewer=file-view-default">MLish with typeclasses</a>
+    <ul>
+  <li><a href="https://bitbucket.org/stchang/macrotypes/src/362b0f310d9dddfa4cd562a9d08c692a87c401a6/turnstile/examples/tests/mlish/generic.mlish?at=master&fileviewer=file-view-default">typeclass tests</a>
+    </ul>
+    </ul>
+
+  </div>
+  <div>
+  <h3>Installing Turnstile</h3>
+  You must have <a href="http://racket-lang.org">Racket</a> installed to use Turnstile.
+  <ul>
+    <li>To install Turnstile, from the racket <tt>bin</tt> directory, run:
+  <br><br>
+      <tt>raco pkg install turnstile --auto</tt>
+      <br><br></li>
+        <li>Or from DrRacket, choose <tt>File->Install Package</tt> and enter "turnstile"</li></ul>
+      <a href="http://docs.racket-lang.org/turnstile/index.html">Turnstile documentation</a>
+      <ul>
+        <li><a href="http://docs.racket-lang.org/turnstile/The_Turnstile_Guide.html">The Turnstile Guide</a></li>
+        <li><a href="http://docs.racket-lang.org/turnstile/The_Turnstile_Reference.html">The Turnstile Reference</a></li>
+      </ul>
+    </div>
+    <div>
+      <a name="artifact"></a>
+      <table><tr>
+          <td><img src="aec-badge-popl.png" width=64></td>
+          <td><h2>Artifact Instructions</h2></td>
+        </tr></table>
+  <h4>VM Image (recommended)</h4>
+    <ul>
+      <li>Download <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a></li>
+      <li>Download the <a href="http://www.ccs.neu.edu/home/stchang/popl2017/type-systems-as-macros.ova">artifact image</a> (2.1GB)
+      <li> Open the VirtualBox viewer, choose <tt>File->Import Appliance</tt>, select the downloaded <tt>.ova</tt> file, and start the VM.
+      <li> Open <tt>README.html</tt> on the Desktop and follow its instructions.
+    </ul>
+  <h4>Manual Installation (only if VM is malfunctioning)</h4>
+    <ul>
+      <li>Download and install <a href="http://download.racket-lang.org">Racket 6.6.</a></li>
+      <li>Clone the repository into the directory <tt>popl2017</tt> (or any directory):
+        <br><br>
+            <tt>git clone https://bitbucket.org/stchang/macrotypes popl2017</tt>
+            <br><br></li>
+      <li>Change directory to the repository root:
+        <br><br>
+            <tt> cd popl2017</tt>
+            <br><br></li>
+      <li>From the repository root, install Turnstile (~30min-1hr):
+        <br><br>
+            <tt>raco pkg install --auto</tt>
+            <br><br></li>
+      <li>Register the documentation:
+        <br><br>
+            <tt>raco setup --doc-index</tt>
+            <br><br></li>
+      <li>From the repository root, change to the <tt>artifact</tt> directory:
+        <br><br>
+            <tt>cd artifact</tt>
+            <br><br></li>
+      <li>Build the README file:
+        <br><br>
+            <tt>make readme</tt>
+            <br><br></li>
+      <li>Open the produced <tt>README.html</tt> file and follow the contained instructions.</li>
+            </ul>
+          </div>
+    <br>
+      <a href="/home/stchang">Home</a>
+</div>
+</body></html>

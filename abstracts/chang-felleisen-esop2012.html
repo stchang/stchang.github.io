@@ -1,0 +1,54 @@
+<!--?xml version="1.0" encoding="iso-8859-1"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>The Call-by-need Lambda Calculus, Revisited</title>
+<meta name="Author" content="Stephen Chang">
+<meta name="Description" content="">
+
+<link rel="stylesheet" href="../front.css">
+</head>
+<body>
+<div id="contents">
+<div class="box">
+
+<p><span style="font-weight: bold;">The Call-by-need Lambda Calculus, Revisited</span>.<br>Stephen Chang and Matthias
+Felleisen.<br>
+
+<em>21st European Symposium on Programming (ESOP 2012)</em>, Tallinn, Estonia, March 2012.<br>
+
+</vr></p>
+
+<p>
+[&nbsp;<a href="../pubs/Chang-Felleisen-ESOP2012.pdf">PDF</a>&nbsp;]
+</p>
+
+<blockquote>
+<p>
+The existing call-by-need &#955 calculi describe lazy evaluation via
+ equational logics. A programmer can use these logics to safely ascertain
+ whether one term is behaviorally equivalent to another or to determine the
+ value of a lazy program. However, neither of the existing calculi models
+ evaluation in a way that matches lazy implementations.
+</p><p> 
+Both calculi suffer from the same two problems. First, the calculi never
+ discard function calls, even after they are completely resolved. Second, the
+ calculi include re-association axioms even though these axioms are merely
+ administrative steps with no counterpart in any implementation.
+</p><p>
+In this paper, we present an alternative axiomatization of lazy evaluation
+ using a single axiom. It eliminates both the function call retention problem
+ and the extraneous re-association axioms. Our axiom uses a grammar of contexts
+ to describe the exact notion of a <em>needed computation</em>. Like its
+ predecessors, our new calculus satisfies consistency and standardization
+ properties and is thus suitable for reasoning about behavioral equivalence. In
+ addition, we establish a correspondence between our semantics and Launchbury's
+ natural semantics.
+</p>
+</blockquote>
+
+</div>
+<br><br>
+<a href="/home/stchang">Home</a>
+</div>
+</body></html>
