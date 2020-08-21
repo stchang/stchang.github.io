@@ -1,0 +1,122 @@
+
+Stephen T. Chang
+
+Department of Computer Science
+UMass Boston
+100 Morrissey Boulevard
+McCormack Hall, 3rd Floor, Room 211
+Boston, MA 02125, USA
+
+stchang216@gmail.com
+stchang.github.io
+
+
+Appointments
+
+2020-,     Assistant Professor, Department of Computer Science, UMass Boston
+2015-2020, Associate Research Scientist, CCIS, Northeastern University
+2015,      Lecturer, CCIS, Northeastern University
+2014,      Programmer, CCIS, Northeastern University
+2010-2014, Research Assistant, CCIS, Northeastern University
+2008-2010, Teaching Assistant, CCIS, Northeastern University
+2008,      Teaching Fellow, SEAS, Harvard University
+
+
+Education
+
+2008-2014, Ph.D. in Computer Science, Northeastern University
+           Advisor: Matthias Felleisen
+           Dissertation: "On the Relationship Between Laziness and Strictness"
+2006-2008, M.E. in Computer Science, Harvard University
+           Advisor: Greg Morrisett
+           Dissertation: "Debugging Lazy Programs"
+1997-2001, B.S.E. cum laude in Electrical Engineering, Princeton University
+
+
+Publications
+
+2020, Dependent Type Systems as Macros.
+      Stephen Chang, Michael Ballantyne, Milo Turner, William J. Bowman.
+      In: Proceedings of the 47th Symposium on Principles of Programming Languages (POPL).
+2018, Symbolic Types for Lenient Symbolic Execution.
+      Stephen Chang, Alex Knauth, and Emina Torlak.
+      In: Proceedings of the 45th Symposium on Principles of Programming Languages (POPL).
+2017, Type Systems as Macros.
+      Stephen Chang, Alex Knauth, and Ben Greenman.
+      In: Proceedings of the 44th Symposium on Principles of Programming Languages (POPL).
+2014, Profiling For Laziness.
+      Stephen Chang and Matthias Felleisen.
+      In: Proceedings of the 41st Symposium on Principles of Programming Languages (POPL).
+2013, Laziness By Need.
+      Stephen Chang.
+      In: Proceedings of the 22nd European Symposium on Programming (ESOP).
+2012, The Call-by-need Lambda Calculus, Revisited.
+      Stephen Chang and Matthias Felleisen.
+      In: Proceedings of the 21st European Symposium on Programming (ESOP).
+2011, From Stack Traces to Lazy Rewriting Sequences.
+      Stephen Chang, Eli Barzilay, John Clements, and Matthias Felleisen.
+      In: Revised Selected Papers of the 23rd International Symposium on Implementation and Application of Functional Languages (IFL).
+2010, Evaluating Call By Need on the Control Stack.
+      Stephen Chang, David Van Horn and Matthias Felleisen.
+      In: Revised Selected Papers of the 11th International Symposium on Trends in Functional Programming (TFP).
+
+
+Professional Activities
+
+2020, Program Committee, META.
+2020, Program Committee, ICFP SRC.
+2019, External Program Committee, PLDI.
+2016, Program Committee, TFPIE.
+2015, Program Committee, OOPSLA Artifact Evaluation.
+2014, Program Committee, Scheme and Functional Programming Workshop.
+2012--, Subreviewer, ESOP, FLOPS, FoSSaCS, ICFP, JFP, OOPSLA, PLDI, POPL, PPDP, TLCA.
+
+
+Awards
+
+2010, Outstanding Teaching Award,
+      College of Computer and Information Sciences (CCIS), Northeastern University.
+2010, Best Student Paper,
+      11th International Symposium on Trends in Functional Programming (TFP).
+2009, Upsilon Pi Epsilon,
+      International Honor Society for the Computing and Information Disciplines.
+
+
+Teaching
+
+Fall 2020,   Instructor,
+             Introduction to the Theory of Computation,
+             UMass Boston.
+Spring 2019, Instructor,
+             Hack Your Own Language,
+             Northeastern University.
+Summer 2018, Instructor,
+             Building Typed Languages,
+             Racket Summer School.
+Spring 2015, Lead Instructor,
+             Program Design Paradigms: How to Design Programs and Classes (Masters),
+             Northeastern University.
+Fall 2014,   Instructor,
+             Program Design Paradigms: How to Design Programs and Classes (Masters),
+             Northeastern University.
+Spring 2010, Head Teaching Assistant,
+             Program Design Paradigms: How to Design Programs and Classes (Masters),
+             Northeastern University.
+Fall 2009,   Teaching Assistant,
+             Program Design Paradigms: How to Design Programs and Classes (Masters),
+             Northeastern University.
+Spring 2009, Teaching Assistant,
+             Fundamentals of Computer Science II: How to Design Classes (Freshmen),
+             Northeastern University.
+Fall 2008,   Teaching Assistant,
+             Fundamentals of Computer Science I: How to Design Programs (Freshmen),
+             Northeastern University.
+Spring 2008, Teaching Fellow,
+             CS51: Introduction to Computer Science II,
+             Harvard University.
+
+
+Additional Work Experience
+
+2008 summer, Software Engineering Intern, Liquid Machines, Inc., Waltham, MA.
+2001-2006, Software Engineer, Teradyne, Inc., Boston, MA.
