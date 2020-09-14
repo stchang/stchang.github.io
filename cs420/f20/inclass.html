@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>In-Class Exercises</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420:<span class="mywbr"> &nbsp;</span> Intro to Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">In-<wbr></wbr>Class Exercises</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">In-<wbr></wbr>Class Exercises</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="#%28part._inclass0914%29" class="tocviewlink" data-pltdoc="x">Sept 14, 2020:<span class="mywbr"> &nbsp;</span> DFAs</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber"></span><a href="#%28part._inclass0914%29" class="tocsubseclink" data-pltdoc="x">Sept 14, 2020:<span class="mywbr"> &nbsp;</span> DFAs</a></td></tr><tr><td><span class="tocsublinknumber"></span><a href="#%28part._.Question%29" class="tocsubseclink" data-pltdoc="x">Question</a></td></tr><tr><td><span class="tocsublinknumber"></span><a href="#%28part._.Answer%29" class="tocsubseclink" data-pltdoc="x">Answer</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="policies.html" title="backward to &quot;Course Policies&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<a href="hw0.html" title="forward to &quot;Homework 0&quot;" data-pltdoc="x">next &rarr;</a></span>&nbsp;</div><h3><a name="(part._inclass)"></a>In-Class Exercises</h3><p>This page will include any extra material from lectures.</p><h4><a name="(part._inclass0914)"></a>Sept 14, 2020: DFAs</h4><h5><a name="(part._.Question)"></a>Question</h5><p>Design a DFA <span class="texMathInline">M</span> that recognizes language <span class="texMathInline">A</span>:</p><p><span class="texMathInline">A = \{w\mid w\textrm{ has exactly three } 1\textrm{s}\}</span></p><p>Assume <span class="texMathInline">\Sigma = \{0,1\}</span>.</p><p><div class="SIntrapara">Recall Definition 1.5 from the book: a DFA is a 5-tuple <span class="texMathInline">(Q,\Sigma,\delta,q_0,F)</span>, where:
+                </div><div class="SIntrapara"><ul><li><p><span class="texMathInline">Q</span> is a finite set called the states,</p></li><li><p><span class="texMathInline">\Sigma</span> is a finite set called the alphabet,</p></li><li><p><span class="texMathInline">\delta:Q\times\Sigma\rightarrow Q</span> is the transition function,</p></li><li><p><span class="texMathInline">q_0\in Q</span> is the start state, and</p></li><li><p><span class="texMathInline">F\subseteq Q</span> is the set of accept states.</p></li></ul></div></p><h5><a name="(part._.Answer)"></a>Answer</h5><p><img src="dfa-inclass-3-1s.png" alt="" width="805" height="307"/></p><ul><li><p>Each state in the machine represents how many <span class="texMathInline">1</span>s have been seen "so far".</p></li><li><p>Seeing another <span class="texMathInline">1</span> moves to the next state.</p></li><li><p>Seeing a <span class="texMathInline">0</span> keeps the machine in the same state.</p></li><li><p>Accept if exactly three <span class="texMathInline">1</span>s have been seen.</p></li><li><p>formally:</p><p><div class="SIntrapara"><span class="texMathInline">M = (Q,\Sigma,\delta, q_{start},F)</span> where:
+</div><div class="SIntrapara"><ul><li><p><span class="texMathInline">Q = \{q_0,q_1,q_2,q_3,q_4\}</span></p></li><li><p><span class="texMathInline">\Sigma = \{0,1\}</span></p></li><li><p><div class="SIntrapara"><span class="texMathInline">\delta =</span>
+  </div><div class="SIntrapara"><table cellspacing="0" cellpadding="0" class="boxed" style="border-collapse: collapse;"><tr><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p></p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>0</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>1</p></td></tr><tr><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q0</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q0</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q1</p></td></tr><tr><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q1</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q1</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q2</p></td></tr><tr><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q2</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q2</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q3</p></td></tr><tr><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q3</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q3</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q4</p></td></tr><tr><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q4</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q4</p></td><td align="center" style="border-bottom: 1px solid black;; border-left: 1px solid black;; border-right: 1px solid black;"><p>q4</p></td></tr></table></div></p></li><li><p><span class="texMathInline">q_{start} = q_0</span></p></li><li><p><span class="texMathInline">F = \{q3\}</span></p></li></ul></div></p></li></ul><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="policies.html" title="backward to &quot;Course Policies&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<a href="hw0.html" title="forward to &quot;Homework 0&quot;" data-pltdoc="x">next &rarr;</a></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
