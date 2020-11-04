@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 7</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420:<span class="mywbr"> &nbsp;</span> Intro to Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="lectureextra.html" class="tocviewlink" data-pltdoc="x">Lecture Extra</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="hw5.html" class="tocviewlink" data-pltdoc="x">Homework 5</a></td></tr><tr><td align="right"></td><td><a href="hw6.html" class="tocviewlink" data-pltdoc="x">Homework 6</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 7</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 7</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw7-readme%29" class="tocviewlink" data-pltdoc="x">README</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw7-diag%29" class="tocviewlink" data-pltdoc="x">A Diagonalization Proof</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw7-etm%29" class="tocviewlink" data-pltdoc="x">E_<span class="mywbr"> &nbsp;</span>TM is not Turing-<wbr></wbr>recognizable</a></td></tr><tr><td align="right">4&nbsp;</td><td><a href="#%28part._hw7-intersect%29" class="tocviewlink" data-pltdoc="x">Intersection of Context-<wbr></wbr>Free and Regular</a></td></tr><tr><td align="right">5&nbsp;</td><td><a href="#%28part._hw7-palindrome%29" class="tocviewlink" data-pltdoc="x">Palindromes in Regular Languages?</a></td></tr><tr><td align="right">6&nbsp;</td><td><a href="#%28part._hw7-eqcfg%29" class="tocviewlink" data-pltdoc="x">EQ_<span class="mywbr"> &nbsp;</span>CFG is undecidable</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw7-readme%29" class="tocsubseclink" data-pltdoc="x">README</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw7-diag%29" class="tocsubseclink" data-pltdoc="x">A Diagonalization Proof</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw7-etm%29" class="tocsubseclink" data-pltdoc="x">E_<span class="mywbr"> &nbsp;</span>TM is not Turing-<wbr></wbr>recognizable</a></td></tr><tr><td><span class="tocsublinknumber">4<tt>&nbsp;</tt></span><a href="#%28part._hw7-intersect%29" class="tocsubseclink" data-pltdoc="x">Intersection of Context-<wbr></wbr>Free and Regular</a></td></tr><tr><td><span class="tocsublinknumber">5<tt>&nbsp;</tt></span><a href="#%28part._hw7-palindrome%29" class="tocsubseclink" data-pltdoc="x">Palindromes in Regular Languages?</a></td></tr><tr><td><span class="tocsublinknumber">6<tt>&nbsp;</tt></span><a href="#%28part._hw7-eqcfg%29" class="tocsubseclink" data-pltdoc="x">EQ_<span class="mywbr"> &nbsp;</span>CFG is undecidable</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw6.html" title="backward to &quot;Homework 6&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3><a name="(part._hw7)"></a>Homework 7</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Tue, 3 Nov 2020 23:43:36 -0500</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Wed Nov 4, 00:00 EST
+<span style="font-weight: bold">Due</span>: Tues Nov 10, 23:59 EST</p><p>This homework is for material from Chapter 5 of the textbook.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw7-readme%29" data-pltdoc="x">README</a> (2 points)</p></li><li><p><a href="#%28part._hw7-diag%29" data-pltdoc="x">A Diagonalization Proof</a> (6 points)</p></li><li><p><a href="#%28part._hw7-etm%29" data-pltdoc="x">E_TM is not Turing-recognizable</a> (6 points)</p></li><li><p><a href="#%28part._hw7-intersect%29" data-pltdoc="x">Intersection of Context-Free and Regular</a> (6 points)</p></li><li><p><a href="#%28part._hw7-palindrome%29" data-pltdoc="x">Palindromes in Regular Languages?</a> (6 points)</p></li><li><p><a href="#%28part._hw7-eqcfg%29" data-pltdoc="x">EQ_CFG is undecidable</a> (6 points)</p></li></ol><p><span style="font-weight: bold">Total</span>: 32 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p>Submit this assignment at <a href="https://www.gradescope.com/courses/160337/assignments/765736">Gradescope <span class="stt">hw7</span></a>.</p><p><div class="SIntrapara">You may write up your solution however you like but the submission:
+</div><div class="SIntrapara"><ul><li><p>should only include pdf or plain text files,</p></li><li><p>and each file must be assigned to the correct problem in Gradescope.</p></li></ul></div></p><h4>1<tt>&nbsp;</tt><a name="(part._hw7-readme)"></a>README</h4><p>Create a <span class="stt">README</span> file containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required
+information</a>, and submit it along with the rest of the homework.</p><h4>2<tt>&nbsp;</tt><a name="(part._hw7-diag)"></a>A Diagonalization Proof</h4><p>In class (and in the book), to show that there are more languages than
+Turing machines, we used the fact that set of all infinite binary
+sequences&#8212;<wbr></wbr>infinite strings of <span class="texMathInline">1</span>s and <span class="texMathInline">0</span>s&#8212;<wbr></wbr>is
+uncountable. That is, there is no bijection between this set and the
+natural numbers.</p><p>Prove that the set of all infinite binary sequences is
+uncountable. Use diagonalization.</p><h4>3<tt>&nbsp;</tt><a name="(part._hw7-etm)"></a>E_TM is not Turing-recognizable</h4><p><span class="texMathInline">E_{TM} = \{\left\langle M\right\rangle\mid M \textrm{ is a TM and } L(M) = \emptyset\}</span></p><p>We showed in class that <span class="texMathInline">E_{TM}</span> is undecidable, by reducing it to
+<span class="texMathInline">A_{TM}</span>.</p><p>Show that <span class="texMathInline">E_{TM}</span> is <span class="emph">not</span> even Turing-recognizable!</p><h4>4<tt>&nbsp;</tt><a name="(part._hw7-intersect)"></a>Intersection of Context-Free and Regular</h4><p>You proved in <a href="hw1.html" data-pltdoc="x">Homework 1</a>, <a href="hw1.html#%28part._hw1-intersection%29" data-pltdoc="x">The Intersection Operation (Optional Bonus)</a>, that regular
+languages are closed under intersection.</p><p>But we showed in class that context-free languages are <span class="emph">not</span> closed under intersection.</p><p>Prove that the intersection of a context-free and a regular language is context-free.</p><p>(It may be helpful to review how we proved intersection closure for regular languages.)</p><h4>5<tt>&nbsp;</tt><a name="(part._hw7-palindrome)"></a>Palindromes in Regular Languages?</h4><p>You showed that the language of palindromes is context-free in <a href="hw4.html" data-pltdoc="x">Homework 4</a>, <a href="hw4.html#%28part._hw4-cfg%29" data-pltdoc="x">CFGs</a>.</p><p>Prove that the language:</p><p><span class="texMathInline">HASPAL_{DFA} = \{\left\langle D\right\rangle\mid D \textrm{ is a DFA that accepts are least one palidrome}\}</span></p><p>is decidable.</p><p>As usual, our library of previous theorems (particularly those about CFLs, and
+maybe problem <a href="#%28part._hw7-intersect%29" data-pltdoc="x">Intersection of Context-Free and Regular</a>) will again be useful here.</p><h4>6<tt>&nbsp;</tt><a name="(part._hw7-eqcfg)"></a>EQ_CFG is undecidable</h4><p>We&rsquo;ve been speculating that:</p><p><span class="texMathDisplay">EQ_{CFG} = \{\left\langle G,H\right\rangle\mid G \textrm{ and }H\textrm{ are CFGs and } L(G) = L(H)\}</span></p><p>is an undecidable language (page 200 of Sipser).</p><p>Now that we&rsquo;ve learned reducibility, we can finally prove it.</p><p>Prove that <span class="texMathInline">EQ_{CFG}</span> is undecidable.</p><p>You may find it helpful to use the Theorem 5.13 from the book, that
+<span class="texMathInline">ALL_{CFG} = \{\left\langle G\right\rangle\mid G\textrm{ is a CFG and } L(G) = \Sigma^*\}</span> is undecidable.</p><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw6.html" title="backward to &quot;Homework 6&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
