@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 9</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420:<span class="mywbr"> &nbsp;</span> Intro to Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="lectureextra.html" class="tocviewlink" data-pltdoc="x">Lecture Extra</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="hw5.html" class="tocviewlink" data-pltdoc="x">Homework 5</a></td></tr><tr><td align="right"></td><td><a href="hw6.html" class="tocviewlink" data-pltdoc="x">Homework 6</a></td></tr><tr><td align="right"></td><td><a href="hw7.html" class="tocviewlink" data-pltdoc="x">Homework 7</a></td></tr><tr><td align="right"></td><td><a href="hw8.html" class="tocviewlink" data-pltdoc="x">Homework 8</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 9</a></td></tr><tr><td align="right"></td><td><a href="hw10.html" class="tocviewlink" data-pltdoc="x">Homework 10</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 9</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw9-readme%29" class="tocviewlink" data-pltdoc="x">README</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw9-rice%29" class="tocviewlink" data-pltdoc="x">Rice&rsquo;s Theorem Again</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw9-brute%29" class="tocviewlink" data-pltdoc="x">Brute Force Computing Languages</a></td></tr><tr><td align="right">4&nbsp;</td><td><a href="#%28part._hw9-bigo%29" class="tocviewlink" data-pltdoc="x">Big-<wbr></wbr>O</a></td></tr><tr><td align="right">5&nbsp;</td><td><a href="#%28part._hw9-edfa%29" class="tocviewlink" data-pltdoc="x">Running time of E_<span class="mywbr"> &nbsp;</span>DFA</a></td></tr><tr><td align="right">6&nbsp;</td><td><a href="#%28part._hw9-polyclosure%29" class="tocviewlink" data-pltdoc="x">Closure of Polynomial Time Languages</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw9-readme%29" class="tocsubseclink" data-pltdoc="x">README</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw9-rice%29" class="tocsubseclink" data-pltdoc="x">Rice&rsquo;s Theorem Again</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw9-brute%29" class="tocsubseclink" data-pltdoc="x">Brute Force Computing Languages</a></td></tr><tr><td><span class="tocsublinknumber">4<tt>&nbsp;</tt></span><a href="#%28part._hw9-bigo%29" class="tocsubseclink" data-pltdoc="x">Big-<wbr></wbr>O</a></td></tr><tr><td><span class="tocsublinknumber">5<tt>&nbsp;</tt></span><a href="#%28part._hw9-edfa%29" class="tocsubseclink" data-pltdoc="x">Running time of E_<span class="mywbr"> &nbsp;</span>DFA</a></td></tr><tr><td><span class="tocsublinknumber">6<tt>&nbsp;</tt></span><a href="#%28part._hw9-polyclosure%29" class="tocsubseclink" data-pltdoc="x">Closure of Polynomial Time Languages</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw8.html" title="backward to &quot;Homework 8&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<a href="hw10.html" title="forward to &quot;Homework 10&quot;" data-pltdoc="x">next &rarr;</a></span>&nbsp;</div><h3><a name="(part._hw9)"></a>Homework 9</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Wed, 18 Nov 2020 09:57:31 -0500</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Wed Nov 18, 00:00 EST
+<span style="font-weight: bold">Due</span>: Tues Nov 25, 23:59 EST</p><p>This homework covers material from Chapters 6 and 7 of the textbook.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw9-readme%29" data-pltdoc="x">README</a> (2 points)</p></li><li><p><a href="#%28part._hw9-rice%29" data-pltdoc="x">Rice&rsquo;s Theorem Again</a> (6 points)</p></li><li><p><a href="#%28part._hw9-brute%29" data-pltdoc="x">Brute Force Computing Languages</a> (4 points)</p></li><li><p><a href="#%28part._hw9-bigo%29" data-pltdoc="x">Big-O</a> (6 points)</p></li><li><p><a href="#%28part._hw9-edfa%29" data-pltdoc="x">Running time of E_DFA</a> (6 points)</p></li><li><p><a href="#%28part._hw9-polyclosure%29" data-pltdoc="x">Closure of Polynomial Time Languages</a> (8 points)</p></li></ol><p><span style="font-weight: bold">Total</span>: 32 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p>Submit this assignment at <a href="https://www.gradescope.com/courses/160337/assignments/838176">Gradescope <span class="stt">hw9</span></a>.</p><p><div class="SIntrapara">You may write up your solution however you like but the submission:
+</div><div class="SIntrapara"><ul><li><p>should only include pdf or plain text files,</p></li><li><p>and each file must be assigned to the correct problem in Gradescope.</p></li></ul></div></p><h4>1<tt>&nbsp;</tt><a name="(part._hw9-readme)"></a>README</h4><p>Create a <span class="stt">README</span> file containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required
+information</a>, and submit it along with the rest of the homework.</p><h4>2<tt>&nbsp;</tt><a name="(part._hw9-rice)"></a>Rice&rsquo;s Theorem Again</h4><p>Prove <a href="hw8.html#%28tech._rice%27s._theorem%29" class="techoutside" data-pltdoc="x"><span class="techinside">Rice&rsquo;s Theorem</span></a> again, this time using the Recursion Theorem
+from chapter 6.1 of the textbook.</p><p>Like in <a href="hw8.html" data-pltdoc="x">Homework 8</a>, you may assume that you have
+both a TM <span class="texMathInline">M_{inP}</span> that is in any given <span class="texMathInline">P</span>, and a TM <span class="texMathInline">M_{notinP}</span> that is not in <span class="texMathInline">P</span>.</p><h4>3<tt>&nbsp;</tt><a name="(part._hw9-brute)"></a>Brute Force Computing Languages</h4><p>In earlier homework problems (e.g., <a href="hw1.html#%28part._hw1-dfalang%29" data-pltdoc="x">DFAs and the Language They Recognize</a> or
+<a href="hw2.html#%28part._hw2-nfalang%29" data-pltdoc="x">NFAs and the Language They Recognize</a>), you were asked to print out the language of a
+finite automaton by trying all strings with your "run" function.</p><ol><li><p>Give an upper bound for the number of times "run" must
+be called. Express your answer as a function on <span class="texMathInline">n</span>, where <span class="texMathInline">n</span> is
+the length of the longest string in the language. You may assume an
+alphabet of alphanumeric ascii characters.</p></li><li><p>Express the answer to the first part in big-<span class="texMathInline">O</span> notation.</p></li></ol><h4>4<tt>&nbsp;</tt><a name="(part._hw9-bigo)"></a>Big-O</h4><p>Give a big-<span class="texMathInline">O</span> upper bound for the following functions on <span class="texMathInline">n</span>:</p><ol><li><p><span class="texMathInline">5n^3+3n^2+80n+100</span></p></li><li><p><span class="texMathInline">22n(4\log_2 n +30)</span></p></li><li><p><span class="texMathInline">100^{11n}+5</span></p></li></ol><h4>5<tt>&nbsp;</tt><a name="(part._hw9-edfa)"></a>Running time of E_DFA</h4><p>Give an upper bound, i.e., use big-<span class="texMathInline">O</span> notation, on the running time for
+the decider for <span class="texMathInline">E_{DFA}</span> from Theorem 4.4.</p><p>State this bound in terms of <span class="texMathInline">q</span> and <span class="texMathInline">t</span>, where for any given DFA,
+<span class="texMathInline">q</span> is the number of states and <span class="texMathInline">t</span> is the maximum transitions
+coming out of any one state.</p><h4>6<tt>&nbsp;</tt><a name="(part._hw9-polyclosure)"></a>Closure of Polynomial Time Languages</h4><p>You showed in the <a href="hw5.html#%28part._hw5-5%29" data-pltdoc="x">Turing Machine and Closure Operations</a> problem of <a href="hw5.html" data-pltdoc="x">Homework 5</a> that
+decidable languages are closed under union and concatenation. Closure
+under intersection can be proved in a similarly. Also, we showed in
+class that decidable languages are closed under complement. Now we
+look at the these operations in the context of time complexity.</p><p>Define <span class="texMathInline">P</span> to be the set of languages that can be decided by a
+single-tape TM that runs in <span class="texMathInline">TIME(n^k)</span>, for some constant <span class="texMathInline">k</span>.</p><p><div class="SIntrapara">Prove that <span class="texMathInline">P</span> is closed under the following operations:
+</div><div class="SIntrapara"><ul><li><p>union,</p></li><li><p>intersection,</p></li><li><p>concatentation,</p></li><li><p>and complement.</p></li></ul></div></p><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw8.html" title="backward to &quot;Homework 8&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<a href="hw10.html" title="forward to &quot;Homework 10&quot;" data-pltdoc="x">next &rarr;</a></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
