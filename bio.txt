@@ -2,5 +2,5 @@ Stephen Chang is an assistant professor of computer science at UMass
 Boston. Prior to joining UMass, he was a research scientist at
 Northeastern University. He also received his PhD from Northeastern in
 2014, MS from Harvard in 2008, and BSE from Princeton in 2001.
-Stephen's research involves programming languages, with an emphasis on
+Stephen's research studies programming languages, with an emphasis on
 macros, type systems, metaprogramming, and DSL construction.
