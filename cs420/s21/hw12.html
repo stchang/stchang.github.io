@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 12</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420:<span class="mywbr"> &nbsp;</span> Intro to Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="lectureextra.html" class="tocviewlink" data-pltdoc="x">Lecture Extra</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="hw5.html" class="tocviewlink" data-pltdoc="x">Homework 5</a></td></tr><tr><td align="right"></td><td><a href="hw6.html" class="tocviewlink" data-pltdoc="x">Homework 6</a></td></tr><tr><td align="right"></td><td><a href="hw7.html" class="tocviewlink" data-pltdoc="x">Homework 7</a></td></tr><tr><td align="right"></td><td><a href="hw8.html" class="tocviewlink" data-pltdoc="x">Homework 8</a></td></tr><tr><td align="right"></td><td><a href="hw9.html" class="tocviewlink" data-pltdoc="x">Homework 9</a></td></tr><tr><td align="right"></td><td><a href="hw10.html" class="tocviewlink" data-pltdoc="x">Homework 10</a></td></tr><tr><td align="right"></td><td><a href="hw11.html" class="tocviewlink" data-pltdoc="x">Homework 11</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 12</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 12</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw12-uhampath%29" class="tocviewlink" data-pltdoc="x">Undirected Hamiltonian Paths</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw12-maxsat%29" class="tocviewlink" data-pltdoc="x">Maximum Satisfiability</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw12-p~3dnp%29" class="tocviewlink" data-pltdoc="x">P, NP, and 2COMPONENTS</a></td></tr><tr><td align="right">4&nbsp;</td><td><a href="#%28part._hw12-kites%29" class="tocviewlink" data-pltdoc="x">Cliques and Kites</a></td></tr><tr><td align="right">5&nbsp;</td><td><a href="#%28part._hw12-traveling%29" class="tocviewlink" data-pltdoc="x">Traveling Salespeople</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw12-uhampath%29" class="tocsubseclink" data-pltdoc="x">Undirected Hamiltonian Paths</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw12-maxsat%29" class="tocsubseclink" data-pltdoc="x">Maximum Satisfiability</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw12-p~3dnp%29" class="tocsubseclink" data-pltdoc="x">P, NP, and 2COMPONENTS</a></td></tr><tr><td><span class="tocsublinknumber">4<tt>&nbsp;</tt></span><a href="#%28part._hw12-kites%29" class="tocsubseclink" data-pltdoc="x">Cliques and Kites</a></td></tr><tr><td><span class="tocsublinknumber">5<tt>&nbsp;</tt></span><a href="#%28part._hw12-traveling%29" class="tocsubseclink" data-pltdoc="x">Traveling Salespeople</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw11.html" title="backward to &quot;Homework 11&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3><a name="(part._hw12)"></a>Homework 12</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Wed, 5 May 2021 14:19:56 -0400</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Wed May 5, 00:00 EST
+<span style="font-weight: bold">Due</span>: Wed May 12, 23:59 EST</p><p>This homework covers material from Chapter 7 of the textbook.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw12-uhampath%29" data-pltdoc="x">Undirected Hamiltonian Paths</a> (6 points)</p></li><li><p><a href="#%28part._hw12-maxsat%29" data-pltdoc="x">Maximum Satisfiability</a> (6 points)</p></li><li><p><a href="#%28part._hw12-p~3dnp%29" data-pltdoc="x">P, NP, and 2COMPONENTS</a> (6 points)</p></li><li><p><a href="#%28part._hw12-kites%29" data-pltdoc="x">Cliques and Kites</a> (6 points)</p></li><li><p><a href="#%28part._hw12-traveling%29" data-pltdoc="x">Traveling Salespeople</a> (6 points)</p></li><li><p>README (2 points)</p></li></ol><p><span style="font-weight: bold">Total</span>: 32 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p>Submit this assignment at <a href="https://www.gradescope.com/courses/219302/assignments/1191640">Gradescope <span class="stt">hw12</span></a>.</p><p><div class="SIntrapara">You may write up your solution however you like but the submission:
+</div><div class="SIntrapara"><ul><li><p>should only include pdf or plain text files,</p></li><li><p>and each file must be assigned to the correct problem in Gradescope.</p></li></ul></div></p><h4>1<tt>&nbsp;</tt><a name="(part._hw12-uhampath)"></a>Undirected Hamiltonian Paths</h4><p>Theorem 7.55 in the textbook proves that</p><p><span class="texMathDisplay">\textrm{\textit{UHAMPATH}} = \{\left\langle G,s,t\right\rangle\mid G\textrm{ is an undirected graph with a Hamiltonian path from }s\textrm{ to }t\}</span></p><p>is <span class="texMathInline">\textrm{NP}</span>-complete.</p><p>Read and understand the proof.</p><p>Then, based on this understanding, re-state the proof in your own
+words by explicitly describing the five steps (numbered 1-5) we
+followed in class when using Theorem 7.36.</p><h4>2<tt>&nbsp;</tt><a name="(part._hw12-maxsat)"></a>Maximum Satisfiability</h4><p>Most of the search problems we&rsquo;ve studied have an optimization variant
+that is often more useful in practice. For example, the
+<span class="texMathInline">\textrm{MAXSAT}</span> problem is the problem of trying to satisfy as
+many clauses as possible in a Boolean formula. It is extremely useful in a variety of applications such as <a href="https://www.researchgate.net/publication/228975365_Dependency_management_for_the_eclipse_ecosystem_Eclipse_p2_metadata_and_resolution">solving package dependencies</a> and <a href="https://www.cs.utexas.edu/~isil/cs389L/maxsat-handouts.pdf">bug finding</a>.</p><p>Formally,</p><p><span class="texMathDisplay">\textrm{MAXSAT} = \{\left\langle\phi , k\right\rangle\mid\phi\textrm{ is a Boolean formula in conjunctive normal form with }k\textrm{ satisfiable clauses}\}</span></p><p>Show that <span class="texMathInline">\textrm{MAXSAT}</span> is <span class="texMathInline">\textbf{NP}</span>-complete.</p><p>Make sure your answer includes all five steps described in class.</p><h4>3<tt>&nbsp;</tt><a name="(part._hw12-p~3dnp)"></a>P, NP, and 2COMPONENTS</h4><p>Show that if <span class="texMathInline">\textbf{P}\neq\textbf{NP}</span>, then the
+<span class="texMathInline">\textrm{2COMPONENTS}</span> problem from <a href="hw11.html" data-pltdoc="x">Homework 11</a> cannot be
+<span class="texMathInline">\textbf{NP}</span>-complete.</p><h4>4<tt>&nbsp;</tt><a name="(part._hw12-kites)"></a>Cliques and Kites</h4><p>Recall that a <a name="(tech._clique)"></a><span style="font-style: italic">clique</span> in an undirected graph is a subgraph
+where all pairs of nodes in that subgraph are connected by an edge.</p><p>A <a name="(tech._kite)"></a><span style="font-style: italic">kite</span> is a subgraph in an undirected graph where half the
+nodes in the subgraph form a <a href="#%28tech._clique%29" class="techoutside" data-pltdoc="x"><span class="techinside">clique</span></a>, and the other half form
+a "tail" where all these tail nodes are connected in a row and the
+last one connects to one of the nodes in the clique (just like in an
+actual kite).</p><p>Formally,</p><p><span class="texMathDisplay">\textrm{KITE} = \{\left\langle G,2k\right\rangle\mid G\textrm{ is an undirected graph containing a kite with } 2k \textrm{ nodes}\}</span></p><p>Show that <span class="texMathInline">\textrm{KITE}</span> is <span class="texMathInline">\textbf{NP}</span>-complete.</p><p>If you use Theorem 7.36, make sure your answer includes all 5 steps described from class.</p><h4>5<tt>&nbsp;</tt><a name="(part._hw12-traveling)"></a>Traveling Salespeople</h4><p>Define the <a href="https://xkcd.com/399/">Traveling Salesperson</a>
+problem to be the language:</p><p><span class="texMathDisplay">\textrm{TSP} = \{\left\langle G\right\rangle\mid G\textrm{ is an undirected graph that contains a cycle that touches every node exactly once}\}</span></p><p>Show that <span class="texMathInline">\textrm{TSP}</span> is <span class="texMathInline">\textbf{NP}</span>-complete.</p><p>If you use Theorem 7.36, make sure your answer includes all 5 steps described from class.</p><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw11.html" title="backward to &quot;Homework 11&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
