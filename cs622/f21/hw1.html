@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 1</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS622:<span class="mywbr"> &nbsp;</span> Theory of Formal Languages</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 1</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw1-dfaformal%29" class="tocviewlink" data-pltdoc="x">DFA Formal Description</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw1-dfarun%29" class="tocviewlink" data-pltdoc="x">Alternate "Run" Function for DFAs</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw1-dfa%29" class="tocviewlink" data-pltdoc="x">Create a DFA</a></td></tr><tr><td align="right">4&nbsp;</td><td><a href="#%28part._hw1-induction%29" class="tocviewlink" data-pltdoc="x">More Fun with Induction</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw1-dfaformal%29" class="tocsubseclink" data-pltdoc="x">DFA Formal Description</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw1-dfarun%29" class="tocsubseclink" data-pltdoc="x">Alternate "Run" Function for DFAs</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw1-dfa%29" class="tocsubseclink" data-pltdoc="x">Create a DFA</a></td></tr><tr><td><span class="tocsublinknumber">4<tt>&nbsp;</tt></span><a href="#%28part._hw1-induction%29" class="tocsubseclink" data-pltdoc="x">More Fun with Induction</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="policies.html" title="backward to &quot;Course Policies&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS622: Theory of Formal Languages&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<a href="hw2.html" title="forward to &quot;Homework 2&quot;" data-pltdoc="x">next &rarr;</a></span>&nbsp;</div><h3><a name="(part._hw1)"></a>Homework 1</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Sun, 12 Sep 2021 00:00:36 -0400</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Mon Sept 13, 00:00 EST
+<span style="font-weight: bold">Due</span>: Sun Sept 19, 23:59 EST</p><p>This assignment explores deterministic finite automata (DFAs).</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw1-dfaformal%29" data-pltdoc="x">DFA Formal Description</a> (4 points)</p></li><li><p><a href="#%28part._hw1-dfarun%29" data-pltdoc="x">Alternate "Run" Function for DFAs</a> (4 points)</p></li><li><p><a href="#%28part._hw1-dfa%29" data-pltdoc="x">Create a DFA</a> (5 + 5 = 10 points)</p></li><li><p><a href="#%28part._hw1-induction%29" data-pltdoc="x">More Fun with Induction</a> (5 points)</p></li><li><p>README (2 point)</p></li></ol><p><span style="font-weight: bold">Total</span>: 25 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/289282/assignments/1483578">Gradescope <span class="stt">hw1</span></a>.</p><p>A submission must include a <span class="stt">README</span> containing
+<a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>, in addition to the
+solution to the problems. Please make sure your solutions are legible.</p><h4>1<tt>&nbsp;</tt><a name="(part._hw1-dfaformal)"></a>DFA Formal Description</h4><p>Recall that a DFA&rsquo;s formal description has five components, e.g. <span class="texMathInline">M = (Q,\Sigma,\delta,q_0,F)</span>.</p><p>Come up with a formal description for the following DFA:</p><p><img src="sipser-ex1.21.png" alt="" width="461" height="339"/></p><h4>2<tt>&nbsp;</tt><a name="(part._hw1-dfarun)"></a>Alternate "Run" Function for DFAs</h4><p>Assume we have some DFA <span class="texMathInline">M = (Q,\Sigma,\delta,q_0,F)</span>.</p><p>In class, we defined a "run" function for
+DFAs, <span class="texMathInline">\hat{\delta}:Q\times\Sigma^*\rightarrow Q</span>:</p><ul><li><p><span class="texMathInline">\hat{\delta}(q,\epsilon) = q</span></p></li><li><p><span class="texMathInline">\hat{\delta}(q,wx) = \delta(\hat{\delta}(q,w),x)</span></p></li></ul><p>Above, in the recursive case, <span class="texMathInline">x\in\Sigma</span>, <span class="texMathInline">w\in\Sigma^*</span>, and the
+single step transition function <span class="texMathInline">\delta</span> is applied to a recursive
+call to <span class="texMathInline">\hat{\delta}</span>, and the last character in the input</p><p>Define an equivalent, alternate "run" function called
+<span class="texMathInline">\hat{\delta_f}</span>, which applies the one-step <span class="texMathInline">\delta</span> function to
+the first character in the input instead of the last one. (Don&rsquo;t
+forget to include the base case.)</p><h4>3<tt>&nbsp;</tt><a name="(part._hw1-dfa)"></a>Create a DFA</h4><p>Prove that the following language is regular:</p><p><span class="texMathDisplay">\{w\mid w\textrm{ has exactly two }\texttt{1}\textrm{s}\}</span></p><p><div class="SIntrapara">In other words:
+</div><div class="SIntrapara"><ol><li><p>Design a DFA that recognizes the language; and</p></li><li><p>give an inductive proof that the DFA does indeed recognize the language.</p></li></ol></div></p><p>Assume the language contains strings from alphabet <span class="texMathInline">\Sigma=\{\texttt{0},\texttt{1}\}</span></p><h4>4<tt>&nbsp;</tt><a name="(part._hw1-induction)"></a>More Fun with Induction</h4><p>Prove that if some DFA <span class="texMathInline">M = (Q,\Sigma,\delta,q_0,F)</span> has a state <span class="texMathInline">q</span> such that <span class="texMathInline"><span class="texMathInline">\delta(q,a)</span>=q</span>, for all <span class="texMathInline">a\in\Sigma</span>,
+then <span class="texMathInline"><span class="texMathInline">\hat{\delta}(q,w)</span>=q</span> for all possible strings <span class="texMathInline">w\in\Sigma^*</span>. Use induction on the length of <span class="texMathInline">w</span>.</p><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="policies.html" title="backward to &quot;Course Policies&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS622: Theory of Formal Languages&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<a href="hw2.html" title="forward to &quot;Homework 2&quot;" data-pltdoc="x">next &rarr;</a></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
