@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 3</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS622:<span class="mywbr"> &nbsp;</span> Theory of Formal Languages</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 3</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 3</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw3-regexpr%29" class="tocviewlink" data-pltdoc="x">Let&rsquo;s Create Some Regular Expressions</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw3-decode%29" class="tocviewlink" data-pltdoc="x">The Decode Operation</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw3-pumping%29" class="tocviewlink" data-pltdoc="x">A Non-<wbr></wbr>Regular Language?</a></td></tr><tr><td align="right">4&nbsp;</td><td><a href="#%28part._hw3-myhill%29" class="tocviewlink" data-pltdoc="x">Regular or Not?</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw3-regexpr%29" class="tocsubseclink" data-pltdoc="x">Let&rsquo;s Create Some Regular Expressions</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw3-decode%29" class="tocsubseclink" data-pltdoc="x">The Decode Operation</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw3-pumping%29" class="tocsubseclink" data-pltdoc="x">A Non-<wbr></wbr>Regular Language?</a></td></tr><tr><td><span class="tocsublinknumber">4<tt>&nbsp;</tt></span><a href="#%28part._hw3-myhill%29" class="tocsubseclink" data-pltdoc="x">Regular or Not?</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw2.html" title="backward to &quot;Homework 2&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS622: Theory of Formal Languages&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3><a name="(part._hw3)"></a>Homework 3</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Sun, 26 Sep 2021 23:22:55 -0400</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Mon Sept 27, 00:00 EST
+<span style="font-weight: bold">Due</span>: Sun Oct 3, 23:59 EST</p><p>This assignment explores regular expressions, and also non-regular languages.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw3-regexpr%29" data-pltdoc="x">Let&rsquo;s Create Some Regular Expressions</a> (4 points)</p></li><li><p><a href="#%28part._hw3-decode%29" data-pltdoc="x">The Decode Operation</a> (6 points)</p></li><li><p><a href="#%28part._hw3-pumping%29" data-pltdoc="x">A Non-Regular Language?</a> (5 points)</p></li><li><p><a href="#%28part._hw3-myhill%29" data-pltdoc="x">Regular or Not?</a> (4 + 4 = 8 points)</p></li><li><p>README (2 point)</p></li></ol><p><span style="font-weight: bold">Total</span>: 25 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/289282/assignments/1515839">Gradescope <span class="stt">hw3</span></a>.</p><p>A submission must include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>,
+in addition to the solution to the problems. Please make sure all solutions are legible.</p><h4>1<tt>&nbsp;</tt><a name="(part._hw3-regexpr)"></a>Let&rsquo;s Create Some Regular Expressions</h4><p><div class="SIntrapara">Come up with regular expressions for the following languages:
+</div><div class="SIntrapara"><ol><li><p><span class="texMathInline">\left\{w\mid w\textrm{ has at least three }\texttt{1}s\right\}</span></p></li><li><p><span class="texMathInline">\left\{w\mid w\textrm{ has at least three }\texttt{1}s\textrm{ or has at least two }\texttt{0}s\right\}</span></p></li><li><p><span class="texMathInline">\left\{w\mid w\textrm{ is an even length string }\right\}</span></p></li><li><p><span class="texMathInline">\left\{w\mid w\textrm{ starts and ends with the same symbol }\right\}</span> (assume <span class="texMathInline">\Sigma = \left\{\texttt{a},\texttt{b}\right\}</span>)</p></li></ol></div></p><p>If you wish, you may use the following additional regular expression notations:</p><ul><li><p><span class="texMathInline">\Sigma = </span> any char in the alphabet of the language</p></li><li><p><span class="texMathInline">\Sigma^* = </span> zero or more of any char in the alphabet of the language</p></li></ul><h4>2<tt>&nbsp;</tt><a name="(part._hw3-decode)"></a>The Decode Operation</h4><p>Show that the <span class="texMathInline">\textrm{\footnotesize{DECODE}}</span> operation is closed for regular languages, where:</p><p><span class="texMathDisplay">\textrm{\footnotesize{DECODE}}(L) =\left\{\textrm{\footnotesize{DECODE}}_{str}(w)\mid w\in L\right\}</span></p><p><span class="texMathInline">L</span> is a language, <span class="texMathInline">w = w_1\cdots w_n</span> represents strings in <span class="texMathInline">L</span>,
+<span class="texMathInline">\textrm{\footnotesize{DECODE}}_{str}(w) = \textrm{\footnotesize{DECODE}}_{char}(w_1)\cdots\textrm{\footnotesize{DECODE}}_{char}(w_n)</span>, and
+<span class="texMathInline">\textrm{\footnotesize{DECODE}}_{char}:\Sigma\rightarrow\Sigma</span> is
+some function mapping each character in the language&rsquo;s alphabet to
+another character in the alphabet.</p><p>Use proof by induction on regular expressions.</p><p><span style="font-weight: bold">Example</span>:</p><p>If:</p><ul><li><p><span class="texMathInline">\textrm{\footnotesize{DECODE}}_{char}(\texttt{c}) = \texttt{s}</span></p></li><li><p><span class="texMathInline">\textrm{\footnotesize{DECODE}}_{char}(\texttt{h}) = \texttt{g}</span></p></li><li><p><span class="texMathInline">\textrm{\footnotesize{DECODE}}_{char}(\texttt{s}) = \texttt{j}</span></p></li><li><p><span class="texMathInline">\textrm{\footnotesize{DECODE}}_{char}(\texttt{a}) = \texttt{e}</span></p></li><li><p><span class="texMathInline">\textrm{\footnotesize{DECODE}}_{char}(\texttt{t}) = \texttt{t}</span></p></li></ul><p>Then: <span class="texMathInline">\textrm{\footnotesize{DECODE}}(\left\{\texttt{cat},\texttt{hat},\texttt{sat}\right\}) =\left\{\texttt{set},\texttt{get},\texttt{jet}\right\}</span></p><h4>3<tt>&nbsp;</tt><a name="(part._hw3-pumping)"></a>A Non-Regular Language?</h4><p>Prove that the following language <span class="texMathInline">EQ</span>, with alphabet <span class="texMathInline">\Sigma = \left\{0,1,\texttt{=}\right\}</span>, is not regular:</p><p><span class="texMathDisplay">EQ = \left\{x\texttt{==}y\mid\textrm{where }x\textrm{ and }y\textrm{ are equal binary numbers }\right\}</span></p><p>Use the Pumping Lemma and proof by contradiction. Make sure your proof has all the correct components.</p><h4>4<tt>&nbsp;</tt><a name="(part._hw3-myhill)"></a>Regular or Not?</h4><p>For each of the following languages, prove whether they are regular or
+non-regular.</p><p>Use the Myhill-Nerode Theorem.</p><p>You may assume the languages use an alphabet <span class="texMathInline">\Sigma = \left\{0,1\right\}</span>.</p><ol><li><p><span class="texMathInline">L_1 = \left\{w\mid\textrm{where }w\textrm{ ends in } 00\right\}</span></p></li><li><p><span class="texMathInline">L_2 = \left\{ww\mid\textrm{where }w\in\Sigma^*\right\}</span></p></li></ol><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw2.html" title="backward to &quot;Homework 2&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS622: Theory of Formal Languages&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
