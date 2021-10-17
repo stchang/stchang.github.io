@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 5</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS622:<span class="mywbr"> &nbsp;</span> Theory of Formal Languages</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 5</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 5</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw5-noncfl%29" class="tocviewlink" data-pltdoc="x">Not a Context-<wbr></wbr>Free Language</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw5-tmconfigs%29" class="tocviewlink" data-pltdoc="x">Turing Machine Config Sequences</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw5-tmclosures%29" class="tocviewlink" data-pltdoc="x">Turing Machines and Closed Operations</a></td></tr><tr><td align="right">4&nbsp;</td><td><a href="#%28part._hw5-cflsdecidable%29" class="tocviewlink" data-pltdoc="x">Venn Diagram Correctness</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw5-noncfl%29" class="tocsubseclink" data-pltdoc="x">Not a Context-<wbr></wbr>Free Language</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw5-tmconfigs%29" class="tocsubseclink" data-pltdoc="x">Turing Machine Config Sequences</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw5-tmclosures%29" class="tocsubseclink" data-pltdoc="x">Turing Machines and Closed Operations</a></td></tr><tr><td><span class="tocsublinknumber">4<tt>&nbsp;</tt></span><a href="#%28part._hw5-cflsdecidable%29" class="tocsubseclink" data-pltdoc="x">Venn Diagram Correctness</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw4.html" title="backward to &quot;Homework 4&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS622: Theory of Formal Languages&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3><a name="(part._hw5)"></a>Homework 5</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Sun, 17 Oct 2021 13:04:23 -0400</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Mon Oct 18, 00:00 EST
+<span style="font-weight: bold">Due</span>: Sun Oct 24, 23:59 EST</p><p>This assignment starts to explore Turing Machines.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw5-noncfl%29" data-pltdoc="x">Not a Context-Free Language</a> (6 points)</p></li><li><p><a href="#%28part._hw5-tmconfigs%29" data-pltdoc="x">Turing Machine Config Sequences</a> (2 + 2 + 2 + 2 = 8 points)</p></li><li><p><a href="#%28part._hw5-tmclosures%29" data-pltdoc="x">Turing Machines and Closed Operations</a> (3 + 3 + 4 + 3 + 3 + 4 = 20 points)</p></li><li><p><a href="#%28part._hw5-cflsdecidable%29" data-pltdoc="x">Venn Diagram Correctness</a> (3 + 3 = 6 points)</p></li><li><p>README (2 point)</p></li></ol><p><span style="font-weight: bold">Total</span>: 42 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/289282/assignments/1562902">Gradescope <span class="stt">hw5</span></a>.</p><p>A submission must include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>,
+in addition to the solution to the problems.</p><h4>1<tt>&nbsp;</tt><a name="(part._hw5-noncfl)"></a>Not a Context-Free Language</h4><p>Prove that the language</p><p><span class="texMathDisplay">L = \left\{ D\mid D\textrm{ is a string representing a valid DFA}\right\}</span></p><p>is not a context-free language.</p><p>In this language, a string representation of a DFA is exactly as defined by the formal definition, where tuples are enclosed in parentheses characters, sets are enclosed with brace, and each component is separated with a comma. The transition function is defined as a set of triples <span class="texMathInline">Q\times\Sigma\times Q</span>. All the other components&#8212;<wbr></wbr>the states, alphabet, start state, and accept states&#8212;<wbr></wbr>are as we&rsquo;ve seen before.</p><p>Here is an example string in <span class="texMathInline">L</span>:
+<span class="texMathDisplay">(\{q_0,q_{accept}\},\{0\},\{(q_0,0,q_{accept}),(q_{accept},0,q_{accept})\},q_0,\{q_{accept}\})</span></p><p>This is a <span style="font-weight: bold">valid</span> DFA because the start state and accept states are drawn from the set of states and every state has transitions for every possible character in the alphabet.</p><p><div class="SIntrapara">Here&rsquo;s some <span style="font-weight: bold">invalid</span> DFA descriptions:
+</div><div class="SIntrapara"><ul><li><p><span class="texMathInline">(\{q_0,q_{accept}\},\{0\},\emptyset,q_0,\{q_{accept}\})</span></p><p>This is invalid because it does not have transitions for some characters in some states.</p></li><li><p><span class="texMathInline">(\emptyset,\{0\},\{(q_0,0,q_{accept}),(q_{accept},0,q_{accept})\},q_0,\{q_{accept}\})</span></p><p>This is invalid because the transitions refer to states that are not in the set of states.</p></li><li><p><span class="texMathInline">(q_0,\{0\},\{(q_0,0,q_{accept}),(q_{accept},0,q_{accept})\},q_0,\{q_{accept}\})</span></p><p>This is an invalid DFA because the set of states is not a set.</p></li><li><p><span class="texMathInline">12345678910</span></p><p>This is an invalid DFA because it does not have any of the required components.</p></li></ul></div></p><h4>2<tt>&nbsp;</tt><a name="(part._hw5-tmconfigs)"></a>Turing Machine Config Sequences</h4><p>Here is the example Turing Machine from class (it&rsquo;s also Figure 3.10 in Sipser textbook):</p><p><img src="sipser-fig3.10small.png" alt="" width="585" height="512"/></p><p>Remember that transitions for any input characters that are not
+explicitly included goes to an implicit <span class="texMathInline">q_{reject}</span> state. Also, if
+a transition does not specify a character to write, then the tape
+contents stay the same.</p><p><div class="SIntrapara">Using this machine, give the sequence of configurations for the
+following input strings: </div><div class="SIntrapara"><ol><li><p><span class="stt">0</span></p></li><li><p><span class="stt">0##0</span></p></li><li><p><span class="stt">01#01</span></p></li><li><p><span class="stt">11#10</span></p></li></ol></div></p><h4>3<tt>&nbsp;</tt><a name="(part._hw5-tmclosures)"></a>Turing Machines and Closed Operations</h4><p><div class="SIntrapara">Show that <span style="font-weight: bold">Turing-decidable</span> languages are closed under the following operations:
+</div><div class="SIntrapara"><ul><li><p>union</p></li><li><p>concatenation</p></li><li><p>complement</p><p>Additionally, explain why your solution for showing that complement is closed for decidable languages won&rsquo;t work for showing that complement is closed for recognizable languages.</p><p>Hint: The complement of a set is the set of all elements no in the set.</p></li></ul></div></p><p><div class="SIntrapara">Show that <span style="font-weight: bold">Turing-recognizable</span> languages are closed under the following operations:
+</div><div class="SIntrapara"><ul><li><p>union</p></li><li><p>concatenation</p></li><li><p><a href="hw3.html#%28part._hw3-decode%29" data-pltdoc="x">The Decode Operation</a></p><p>Additionally, explain why your solution for showing that DECODE is closed for recognizable languages won&rsquo;t work for showing that DECODE is closed for decidable languages.</p></li></ul></div></p><p>Each answer should be a short informal description of a Turing
+Machine, but remember that <span style="font-weight: bold">informal does not mean imprecise or
+incomplete</span>. Answers must still be sufficiently precise so someone
+could reconstruct a formal machine if needed.</p><p>In particular, make sure to <span style="font-weight: bold">be careful with non-termination</span> (when
+appropriate), and <span style="font-weight: bold">include a termination argument</span> (when
+necessary)!</p><h4>4<tt>&nbsp;</tt><a name="(part._hw5-cflsdecidable)"></a>Venn Diagram Correctness</h4><p>We&rsquo;ve seen this Venn diagram in class many times:</p><p><img src="lang-circles.png" alt="" width="654" height="392"/></p><p>But it is actually correct?</p><p>In <a href="hw4.html" data-pltdoc="x">Homework 4</a>&rsquo;s <a href="hw4.html#%28part._hw4-nfa2pda%29" data-pltdoc="x">NFA-&gt;PDA</a> problem, you proved correctness
+of one part of the diagram, by showing that every regular language is
+also context-free. Thus the oval for regular languages should be
+completely inside (i.e., it&rsquo;s a subset of) the oval for context-free
+languages.</p><p>Now prove that the rest of the diagram is correct. Specifically:</p><ol><li><p>Show that it&rsquo;s correct for the "context-free"
+oval to be completely inside the "decidable" one.</p></li><li><p>Do the same thing for the "decidable" and "recognizable" ovals.</p></li></ol><p>Make sure your answer is clear about any statement(s) being proved,
+assumptions, and previous theorems or definitions that are being
+used. Also, don&rsquo;t forget a termination argument if it&rsquo;s needed.</p><p>HINT: Are there previous theorems from our "library" that can help?</p><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw4.html" title="backward to &quot;Homework 4&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS622: Theory of Formal Languages&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
