@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 6</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420:<span class="mywbr"> &nbsp;</span> Intro to Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="hw5.html" class="tocviewlink" data-pltdoc="x">Homework 5</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 6</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 6</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw6-pda%29" class="tocviewlink" data-pltdoc="x">Formal Description For PDAs</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw6-nfa2pda%29" class="tocviewlink" data-pltdoc="x">A Regular Language is a Context-<wbr></wbr>Free</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw6-cfl%29" class="tocviewlink" data-pltdoc="x">Non-<wbr></wbr>CFL Whitespace Checking</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw6-pda%29" class="tocsubseclink" data-pltdoc="x">Formal Description For PDAs</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw6-nfa2pda%29" class="tocsubseclink" data-pltdoc="x">A Regular Language is a Context-<wbr></wbr>Free</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw6-cfl%29" class="tocsubseclink" data-pltdoc="x">Non-<wbr></wbr>CFL Whitespace Checking</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw5.html" title="backward to &quot;Homework 5&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3><a name="(part._hw6)"></a>Homework 6</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Mon, 24 Oct 2022 10:08:57 -0400</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Mon Oct 24, 00:00 EST
+<span style="font-weight: bold">Due</span>: Sun Oct 30, 23:59 EST</p><p>This assignment continues to explore context-free languages.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw6-pda%29" data-pltdoc="x">Formal Description For PDAs</a> (15 points)</p></li><li><p><a href="#%28part._hw6-nfa2pda%29" data-pltdoc="x">A Regular Language is a Context-Free</a> (15 points)</p></li><li><p><a href="#%28part._hw6-cfl%29" data-pltdoc="x">Non-CFL Whitespace Checking</a> (9 points)</p></li><li><p>README (1 point)</p></li></ol><p><span style="font-weight: bold">Total</span>: 40 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/419683/assignments/2365322">Gradescope <span class="stt">hw6</span></a>.
+Please assign each page to the correct problem and make sure your solutions are legible.</p><p>A submission must also include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>.</p><h4>1<tt>&nbsp;</tt><a name="(part._hw6-pda)"></a>Formal Description For PDAs</h4><p>For the following PDA state diagram:
+<img src="sipser-fig2.17pda.png" alt="" width="557" height="278"/></p><ol><li><p>Give a formal description of this PDA. Make sure to include all the necessary components.</p></li><li><p>Give two strings that are in the language recognized by this PDA. For each of these strings, give a sequence of configurations that represents an accepting computation for the PDA. One should end in state <span class="texMathInline">q_4</span> and the other in state <span class="texMathInline">q_7</span>.</p></li><li><p>Give two strings that are not in the language recognized by this PDA.</p></li><li><p>Give a CFG for the language recognized by this PDA.</p></li></ol><h4>2<tt>&nbsp;</tt><a name="(part._hw6-nfa2pda)"></a>A Regular Language is a Context-Free</h4><p>Every regular language is a context-free language!</p><p>Give three proofs of this statement, using each of the three
+representations of regular languages that we have studied: DFAs, NFAs,
+and regular expressions.</p><h4>3<tt>&nbsp;</tt><a name="(part._hw6-cfl)"></a>Non-CFL Whitespace Checking</h4><p>The <a href="hw5.html#%28part._hw5-cfl%29" data-pltdoc="x">Design a CFG, Including Whitespace?</a> problem from <a href="hw5.html" data-pltdoc="x">Homework 5</a> showed a CFL can
+enforce some whitespace requirements (for a programming language like
+Python). This problem will show that not all whitespace requirements
+can be expressed as a CFL.</p><p>Specifically, prove that the following language <span class="texMathInline">W</span>, which contains
+a subset of Python <span class="stt">if</span> statements, is <span style="font-weight: bold">not</span> a CFL.
+Use a proof by contradiction using the Pumping Lemma for CFLs.</p><p>Specifically, <span class="texMathInline">W</span> is a language over alphabet
+<span class="texMathInline">\Sigma = \left\{\texttt{a},\ldots,\texttt{z},0,1\ldots,9,\texttt{\_},\texttt{:}\right\}</span>
+(the <span class="texMathInline">\texttt{\_}</span> char represents a space) that contains strings of the following form:</p><p><span class="texMathInline">W = \left\{w\mid w=\texttt{if}\texttt{\_}b_1\texttt{:} indent_1 n_1\texttt{elif\_}b_2\texttt{:}indent_2 n_2\texttt{else:}indent_3 n_3\right\}</span></p><p><div class="SIntrapara">where:
+</div><div class="SIntrapara"><ol><li><p><span class="texMathInline">b_1,b_2\in\left\{\texttt{true},\texttt{false}\right\}</span></p></li><li><p><span class="texMathInline">n_1,n_2,n_3\in\left\{0,1,\ldots,9\right\}</span></p></li><li><p><span class="texMathInline">indent_1,indent_2,indent_3\in\texttt{\_\_}^*</span></p></li><li><p><span class="texMathInline">|indent_1|=|indent_2|=|indent_3|</span></p></li></ol></div></p><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw5.html" title="backward to &quot;Homework 5&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
