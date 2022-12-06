@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 11</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420:<span class="mywbr"> &nbsp;</span> Intro to Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="hw5.html" class="tocviewlink" data-pltdoc="x">Homework 5</a></td></tr><tr><td align="right"></td><td><a href="hw6.html" class="tocviewlink" data-pltdoc="x">Homework 6</a></td></tr><tr><td align="right"></td><td><a href="hw7.html" class="tocviewlink" data-pltdoc="x">Homework 7</a></td></tr><tr><td align="right"></td><td><a href="hw8.html" class="tocviewlink" data-pltdoc="x">Homework 8</a></td></tr><tr><td align="right"></td><td><a href="hw9.html" class="tocviewlink" data-pltdoc="x">Homework 9</a></td></tr><tr><td align="right"></td><td><a href="hw10.html" class="tocviewlink" data-pltdoc="x">Homework 10</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 11</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 11</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw11-bigo%29" class="tocviewlink" data-pltdoc="x">Big-<wbr></wbr>O Drills</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw11-add%29" class="tocviewlink" data-pltdoc="x">Addition Algorithms</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw11-crossword%29" class="tocviewlink" data-pltdoc="x">Crossword Puzzle Algorithm</a></td></tr><tr><td align="right">4&nbsp;</td><td><a href="#%28part._hw11-path%29" class="tocviewlink" data-pltdoc="x">Paths With Distance</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw11-bigo%29" class="tocsubseclink" data-pltdoc="x">Big-<wbr></wbr>O Drills</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw11-add%29" class="tocsubseclink" data-pltdoc="x">Addition Algorithms</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw11-crossword%29" class="tocsubseclink" data-pltdoc="x">Crossword Puzzle Algorithm</a></td></tr><tr><td><span class="tocsublinknumber">4<tt>&nbsp;</tt></span><a href="#%28part._hw11-path%29" class="tocsubseclink" data-pltdoc="x">Paths With Distance</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw10.html" title="backward to &quot;Homework 10&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3><a name="(part._hw11)"></a>Homework 11</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Mon, 5 Dec 2022 23:02:50 -0500</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Tue Dec 06, 00:00 EST
+<span style="font-weight: bold">Due</span>: Mon Dec 12, 23:59 EST</p><p>This assignment begins to explore time complexity.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw11-bigo%29" data-pltdoc="x">Big-O Drills</a> (6 points)</p></li><li><p><a href="#%28part._hw11-add%29" data-pltdoc="x">Addition Algorithms</a> (4 + 4 + 4 = 12 points)</p></li><li><p><a href="#%28part._hw11-crossword%29" data-pltdoc="x">Crossword Puzzle Algorithm</a> (11 points)</p></li><li><p><a href="#%28part._hw11-path%29" data-pltdoc="x">Paths With Distance</a> (10 points)</p></li><li><p>README (1 point)</p></li></ol><p><span style="font-weight: bold">Total</span>: 40 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/419683/assignments/2481941">Gradescope <span class="stt">hw11</span></a>.
+Please assign each page to the correct problem and make sure your solutions are legible.</p><p>A submission must also include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>.</p><h4>1<tt>&nbsp;</tt><a name="(part._hw11-bigo)"></a>Big-O Drills</h4><p>Answer true or false for each statement below.</p><p>You may give an extra explanation if you think it would help clarify your answer.</p><ol><li><p><span class="texMathInline">1000 = O(n^3)</span></p></li><li><p><span class="texMathInline">1000n^3 = O(n^3)</span></p></li><li><p><span class="texMathInline">n^3 = O(n^6)</span></p></li><li><p><span class="texMathInline">1000^n = 2^{O(n)}</span></p></li><li><p><span class="texMathInline">1000\log n = O(\log n)</span></p></li><li><p><span class="texMathInline">n\log n = O(\log n)</span></p></li></ol><h4>2<tt>&nbsp;</tt><a name="(part._hw11-add)"></a>Addition Algorithms</h4><p>This problem is about addition of two binary numbers. In this problem,
+let <span class="texMathInline">n</span> be the length of the input, which is the number of digits in
+the numbers. (You may assume that the input numbers have the same
+number of digits.)</p><ol><li><p>Give a "brute force" algorithm for adding two binary numbers.
+Show that the time complexity of this algorithm is exponential in the length of the input.</p></li><li><p>Now show that the <a href="https://en.wikipedia.org/wiki/Carry_(arithmetic)">elementary school addition algorithm</a> you learned as a child is in <span class="texMathInline">\textbf{P}</span>.</p></li><li><p>Finally, show that if we instead use <a href="https://en.wikipedia.org/wiki/Unary_numeral_system">unary numbers</a> (instead of binary), the same algorithm will be exponentially slower.</p></li></ol><h4>3<tt>&nbsp;</tt><a name="(part._hw11-crossword)"></a>Crossword Puzzle Algorithm</h4><p>The New York Times website has a
+<a href="https://www.nytimes.com/crosswords/game/mini">daily "mini"
+crossword puzzle</a> that has at most 5 rows and 5 columns.</p><ol><li><p>Come up with a "brute force" algorithm for solving this puzzle and
+compute the run time of your solution.
+You may assume the alphabet for filling in the crossword is <span class="texMathInline">\left\{\texttt{A},\ldots,\texttt{Z}\right\}</span>.</p></li><li><p>Explain why (surprisingly) this problem is in <span class="texMathInline">\textbf{P}</span>!</p></li></ol><h4>4<tt>&nbsp;</tt><a name="(part._hw11-path)"></a>Paths With Distance</h4><p>In class we learned about the <span class="texMathInline">\textit{PATH}</span> problem (see also
+Sipser Thm 7.14) for unweighted graphs.</p><p>We now change the problem to use weighted graphs. More specifically,
+let a weighted directed graph be a pair <span class="texMathInline">(V,E)</span> where <span class="texMathInline">V</span> is a set
+of vertices and <span class="texMathInline">E</span> is a set of weighted edges where each edge is a
+triple <span class="texMathInline">(u,v,wgt)</span> where <span class="texMathInline">u</span> and <span class="texMathInline">v</span> are vertices and <span class="texMathInline">wgt</span> is
+a weight value.</p><p>Now define <span class="texMathInline">\textit{PATH}_{wgt} = \left\{\left\langle G,s,t,k\right\rangle\mid G\textrm{ is a graph with directed path from }s\textrm{ to }t\textrm{ with distance } \leq k\right\}</span></p><p>You may assume that the weights in the graph represent distances.</p><p>Show that <span class="texMathInline">\textit{PATH}_{wgt}</span> is in <span class="texMathInline">\textbf{P}</span>.</p><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw10.html" title="backward to &quot;Homework 10&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
