@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 11</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420:<span class="mywbr"> &nbsp;</span> Intro to Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="hw5.html" class="tocviewlink" data-pltdoc="x">Homework 5</a></td></tr><tr><td align="right"></td><td><a href="hw6.html" class="tocviewlink" data-pltdoc="x">Homework 6</a></td></tr><tr><td align="right"></td><td><a href="hw7.html" class="tocviewlink" data-pltdoc="x">Homework 7</a></td></tr><tr><td align="right"></td><td><a href="hw8.html" class="tocviewlink" data-pltdoc="x">Homework 8</a></td></tr><tr><td align="right"></td><td><a href="hw9.html" class="tocviewlink" data-pltdoc="x">Homework 9</a></td></tr><tr><td align="right"></td><td><a href="hw10.html" class="tocviewlink" data-pltdoc="x">Homework 10</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 11</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 11</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw11-bigo%29" class="tocviewlink" data-pltdoc="x">Big-<wbr></wbr>O Practice</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw11-locks%29" class="tocviewlink" data-pltdoc="x">Guessing Combination Locks</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw11-nfa-dfa%29" class="tocviewlink" data-pltdoc="x">NFA-<wbr></wbr>&gt;DFA Running Time</a></td></tr><tr><td align="right">4&nbsp;</td><td><a href="#%28part._hw11-kleene%29" class="tocviewlink" data-pltdoc="x">Decidable vs Poly Time</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw11-bigo%29" class="tocsubseclink" data-pltdoc="x">Big-<wbr></wbr>O Practice</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw11-locks%29" class="tocsubseclink" data-pltdoc="x">Guessing Combination Locks</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw11-nfa-dfa%29" class="tocsubseclink" data-pltdoc="x">NFA-<wbr></wbr>&gt;DFA Running Time</a></td></tr><tr><td><span class="tocsublinknumber">4<tt>&nbsp;</tt></span><a href="#%28part._hw11-kleene%29" class="tocsubseclink" data-pltdoc="x">Decidable vs Poly Time</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw10.html" title="backward to &quot;Homework 10&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3><a name="(part._hw11)"></a>Homework 11</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Sun, 30 Apr 2023 18:56:59 -0400</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Mon May 01, 00:00 EST
+<span style="font-weight: bold">Due</span>: Sun May 07, 23:59 EST</p><p>This assignment begins to explore time complexity.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw11-bigo%29" data-pltdoc="x">Big-O Practice</a> (12 points)</p></li><li><p><a href="#%28part._hw11-locks%29" data-pltdoc="x">Guessing Combination Locks</a> (12 points)</p></li><li><p><a href="#%28part._hw11-nfa-dfa%29" data-pltdoc="x">NFA-&gt;DFA Running Time</a> (12 points)</p></li><li><p><a href="#%28part._hw11-kleene%29" data-pltdoc="x">Decidable vs Poly Time</a> (7 + 6 = 13 points)</p></li><li><p>README (1 point)</p></li></ol><p><span style="font-weight: bold">Total</span>: 50 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/484045/assignments/2857396">Gradescope <span class="stt">hw11</span></a>.
+Please assign each page to the correct problem and make sure your solutions are legible.</p><p>A submission must also include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>.</p><h4>1<tt>&nbsp;</tt><a name="(part._hw11-bigo)"></a>Big-O Practice</h4><p>Answer TRUE or FALSE for each statement below.</p><p>For each statement that is TRUE, give a value for <span class="texMathInline">c</span> and <span class="texMathInline">n_0</span>
+that satisfies the inequality in the definition of big-O.</p><ol><li><p><span class="texMathInline">99 = O(n^2)</span></p></li><li><p><span class="texMathInline">n+100 = O(n)</span></p></li><li><p><span class="texMathInline">n-100 = O(\log n)</span></p></li><li><p><span class="texMathInline">n^{10} = 2^{O(n)}</span></p></li><li><p><span class="texMathInline">10n\log n = O(\log n)</span></p></li><li><p><span class="texMathInline">100^{2n} = 2^{O(n)}</span></p></li></ol><h4>2<tt>&nbsp;</tt><a name="(part._hw11-locks)"></a>Guessing Combination Locks</h4><p><img src="lock-sm.jpg" alt=""/></p><ol><li><p>Imagine you are on vacation and you forgot the combination to the
+4-digit combination lock (like in the picture above) for your luggage.
+Give a brute force algorithm for figuring out the combination of
+this 4-digit lock (each digit is 0-9) and give the worst case number
+of steps. Explain, however, why this problem is in <span class="texMathInline">\textbf{P}</span>.</p></li><li><p>Now imagine the brute-force algorithm from above is generalized to arbitrary locks with <span class="texMathInline">n</span> digits. Explain the worst case run time of this algorithm in terms of <span class="texMathInline">n</span> and explain why it is no longer in <span class="texMathInline">\textbf{P}</span>.</p></li><li><p>Finally, assume that when trying to open an <span class="texMathInline">n</span> digit lock, after each guess, you have a way of knowing whether the guess is "too high" or "too low". Give an algorithm that, using this new knowledge after each guess, runs in at most polynomial time.</p></li></ol><h4>3<tt>&nbsp;</tt><a name="(part._hw11-nfa-dfa)"></a>NFA-&gt;DFA Running Time</h4><p>When learning about regular languages, we defined an algorithm
+<span class="texMathInline">\texttt{NFA}\!\!\rightarrow\!\!\texttt{DFA}</span> (the same procedure is
+described in Sipser Theorem 1.39) to convert an NFA, e.g.,
+<span class="texMathInline">N = (Q_N,\Sigma,\delta_N,q_N,F_N)</span>, to an equivalent DFA, e.g., <span class="texMathInline">D = (Q_D,\Sigma,\delta_D,q_D,F_D)</span>, and we
+used this procedure in the deciders of several languages.</p><p>Compute the running time of this
+<span class="texMathInline">\texttt{NFA}\!\!\rightarrow\!\!\texttt{DFA}</span> algorithm. (You may
+use the simpler version that assumes that <span class="texMathInline">N</span> has no <span class="texMathInline">\varepsilon</span>
+transitions.) Express your answer using big-O notation in terms a
+variable <span class="texMathInline">n = |Q_N|</span> representing the number of states in the NFA.
+Is this a polynomial time algorithm?</p><p>Structure your solution according to the components of the NFA. In
+other words, your solution should say how many steps it takes to
+compute <span class="texMathInline">Q_D</span> from <span class="texMathInline">Q_N</span>, how many steps it takes to compute
+<span class="texMathInline">\delta_D</span> from <span class="texMathInline">\delta_N</span>, etc., and then add them all
+together. As another hint, to calculate this runtime, you want to be
+thinking about the size of each of the computed DFA parts, in
+comparison to their NFA counterparts.</p><h4>4<tt>&nbsp;</tt><a name="(part._hw11-kleene)"></a>Decidable vs Poly Time</h4><ol><li><p>Show how a decider <span class="texMathInline">M_1</span> for a language <span class="texMathInline">L_1</span> can be used to create a decider for the language <span class="texMathInline">L_1^\prime=\left\{s_1\ldots s_m\mid m\geq 0, s_i\in L_1\textrm{ for }0\leq i\leq m\right\}</span>. Remember that deciders must have termination arguments.</p></li><li><p>Show how a poly time decider <span class="texMathInline">M_2</span> for a language <span class="texMathInline">L_2</span> can be used to create a poly time decider for the language <span class="texMathInline">L_2^\prime=\left\{s_1\ldots s_m\mid m\geq 0, s_i\in L_2\textrm{ for }0\leq i\leq m\right\}</span>. Remember that poly time deciders need an explanation of their worst case time complexity, which should be <span class="texMathInline">O(n^k)</span> for some constant <span class="texMathInline">k\geq 0</span>.</p></li></ol><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;</span><span class="navright">&nbsp;&nbsp;<a href="hw10.html" title="backward to &quot;Homework 10&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
