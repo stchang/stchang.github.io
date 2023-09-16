@@ -136,6 +136,10 @@ table td {
   color: #e0e0e0;
 }
 
+.navleft .tocsettoggle {
+  display: none;
+}
+
 .searchform {
   display: inline;
   margin: 0;
@@ -152,8 +156,11 @@ table td {
   padding: 0px;
   background-color: #eee;
   border: 1px solid #ddd;
-  text-align: center;
   vertical-align: middle;
+}
+
+.searchbox::placeholder {
+  text-align: center;
 }
 
 #contextindicator {
