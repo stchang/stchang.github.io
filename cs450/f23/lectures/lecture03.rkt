@@ -55,6 +55,7 @@
 
 (define WORLD-WIDTH 200)
 (define WORLD-HEIGHT 200)
+(define EMPTY-SCENE (empty-scene WORLD-WIDTH WORLD-HEIGHT))
 
 ;; A WorldState is a Non-negative Integer
 ;; Interp: Represents the y Coordinate of the center of a
@@ -62,29 +63,29 @@
 (define (WorldState? x)
   (exact-nonnegative-integer? x))
 
-(define INITIAL-WORLD 0)
+(define INITIAL-WORLDSTATE 0)
 
-(define BALL-RADIUS 50)
-(define BALL-X (/ WORLD-WIDTH 2))
+(define BALL-RADIUS 50) ; pixels
+(define BALL-X (/ WORLD-WIDTH 2)) ; Coordinate
 (define BALL-IMG
   (circle BALL-RADIUS "solid" "red"))
 
-;; render: WorldState -> Image
+;; render-world: WorldState -> Image
 ;; Draws a WorldState as a 2htdp/image Image
-(define (render w)
+(define (render-world w)
   (place-image
    BALL-IMG
    BALL-X w
-   (empty-scene WORLD-WIDTH WORLD-HEIGHT)))
+   EMPTY-SCENE))
 
-;; next-world : WorldState -> WorldState
+;; next-worldstate : WorldState -> WorldState
 ;; Each tick increments y pos by 1
-(define (next-world w)
+(define (next-worldstate w)
   (add1 w))
 
 (define (start-world)
-  (big-bang INITIAL-WORLD
-    [on-tick next-world]
-    [to-draw render]))
+  (big-bang INITIAL-WORLDSTATE
+    [on-tick next-worldstate]
+    [to-draw render-world]))
 
 (start-world)
