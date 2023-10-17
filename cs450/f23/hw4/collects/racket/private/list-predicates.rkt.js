@@ -1,0 +1,1 @@
+import * as $rjs_core from '../../../runtime/core.js';import * as M0 from "../../../runtime/kernel.rkt.js";var empty_p = function(l1077) {return M0.null_p(l1077);};var cons_p = function(l1078) {return M0.pair_p(l1078);};var __rjs_quoted__ = {};export { __rjs_quoted__,cons_p,empty_p };
