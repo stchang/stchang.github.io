@@ -21,7 +21,9 @@
 ;; - a class constructor implicitly populates the method fields for you
 ;; - in an OO lang, the "dispatch method" is implicitly defined for you
 
-;; We'll demonstrate this with an example.
+;; We'll demonstrate this with a Shape example.
+;; In an OOP lang, one would typically implement this with
+;; a Shape interface that has a render method, and two classes.
 
 (require 2htdp/image
          rackunit)
