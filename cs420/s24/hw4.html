@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 4</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420:<span class="mywbr"> &nbsp;</span> Intro to Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 4</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 4</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw4-kleene%29" class="tocviewlink" data-pltdoc="x">Regular Languages Closed Under Kleene Star?</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw4-regexpr%29" class="tocviewlink" data-pltdoc="x">Regular Expression Exercises</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw4-induction%29" class="tocviewlink" data-pltdoc="x">Induction Practice</a></td></tr><tr><td align="right">4&nbsp;</td><td><a href="#%28part._hw4-regexp-ind%29" class="tocviewlink" data-pltdoc="x">Proof by Induction Involving Regular Expressions</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw4-kleene%29" class="tocsubseclink" data-pltdoc="x">Regular Languages Closed Under Kleene Star?</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw4-regexpr%29" class="tocsubseclink" data-pltdoc="x">Regular Expression Exercises</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw4-induction%29" class="tocsubseclink" data-pltdoc="x">Induction Practice</a></td></tr><tr><td><span class="tocsublinknumber">4<tt>&nbsp;</tt></span><a href="#%28part._hw4-regexp-ind%29" class="tocsubseclink" data-pltdoc="x">Proof by Induction Involving Regular Expressions</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw3.html" title="backward to &quot;Homework 3&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3><a name="(part._hw4)"></a>Homework 4</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Mon, 4 Mar 2024 11:14:34 -0500</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Mon Mar 04, 12:00pm EST (noon)
+<span style="font-weight: bold">Due</span>: Mon Mar 18, 12:00pm EST (noon)</p><p>This assignment explores regular expressions and inductive proofs.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw4-kleene%29" data-pltdoc="x">Regular Languages Closed Under Kleene Star?</a> (10 points)</p></li><li><p><a href="#%28part._hw4-regexpr%29" data-pltdoc="x">Regular Expression Exercises</a> (2 * 6 = 12 points)</p></li><li><p><a href="#%28part._hw4-induction%29" data-pltdoc="x">Induction Practice</a> (9 points)</p></li><li><p><a href="#%28part._hw4-regexp-ind%29" data-pltdoc="x">Proof by Induction Involving Regular Expressions</a> (6 + 6 = 12 points)</p></li><li><p>README (1 point)</p></li></ol><p><span style="font-weight: bold">Total</span>: 44 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/668477/assignments/4161773">Gradescope <span class="stt">hw4</span></a>.
+Please assign each page to the correct problem and make sure your solutions are legible.</p><p>A submission must also include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>.</p><h4>1<tt>&nbsp;</tt><a name="(part._hw4-kleene)"></a>Regular Languages Closed Under Kleene Star?</h4><p>In class we learned about the Kleene star operation on languages:</p><p><span class="texMathDisplay">A^*=\left\{x_1x_2\ldots x_k\mid k\geq 0\textrm{ and each }x_i\in A\right\}</span></p><p>This problem asks you to prove that the set of regular languages is
+closed under the Kleene star operation. Specifically:</p><ul><li><p>Give the equivalent IF-THEN statement that must be proved.</p></li><li><p><div class="SIntrapara">Give a proof of this IF-THEN statement.
+     </div><div class="SIntrapara"><ul><li><p>The proof must be in the form of a Statements and Justifications Table.</p></li><li><p>If the proof needs a machine-language "Equivalence Table" (e.g.,
+to "prove" that a machine recognizes some language) the table must
+include at least two example strings, one in the language and one not
+in the language. Also, each line of the table needs a justification.</p></li><li><p>Finally, the proof must start with DFA representation of some regular
+language <span class="texMathInline">L</span>, and that DFA must be transformed into an NFA for
+<span class="texMathInline">L^*</span> without using <span class="texMathInline">\textrm{convert}</span> from <a href="hw3.html" data-pltdoc="x">Homework 3</a> Problem
+<a href="hw3.html#%28part._hw3-dfanfa%29" data-pltdoc="x">Equivalent Machines</a>.</p></li></ul></div></p></li></ul><h4>2<tt>&nbsp;</tt><a name="(part._hw4-regexpr)"></a>Regular Expression Exercises</h4><p>(2 points each)</p><p>Below are some languages (their alphabet <span class="texMathInline">\Sigma</span> is as indicated) or machines
+that we have previously seen in this course.</p><p>Come up with regular expressions that either describe the given language, or
+is equivalent to the given machine:</p><ol><li><p><span class="texMathInline">\left\{w\mid w\textrm{ has an odd number of }\texttt{1}s\right\}</span>,</p><p><span class="texMathInline">\Sigma = \left\{\texttt{0},\texttt{1}\right\}</span></p></li><li><p><span class="texMathInline">\left\{w\mid w\textrm{ has exactly three }\texttt{1}s\right\}</span>,</p><p><span class="texMathInline">\Sigma = \left\{\texttt{0},\texttt{1}\right\}</span></p></li><li><p><span class="texMathInline">\left\{w\mid w\textrm{ is a three-digit number representing a 400-level course}\right\}</span>,</p><p><span class="texMathInline">\Sigma = \left\{\texttt{0,1,2,3,4,5,6,7,8,9}\right\}</span></p></li><li><p>The DFA:</p><p><img src="fig1.4.png" alt="" width="349" height="160"/></p></li><li><p>The NFA:</p><p><img src="fig1.27-nfa.png" alt="" width="466" height="158"/></p></li><li><p>The NFA:</p><p><img src="hmu-fig2.21nfa.png" alt="" width="471" height="214"/></p><p>(State 1 is the start state)</p></li></ol><p>In addition to the regular expressions that are allowed by the formal
+definition of regular expressions, your answers may also use the following
+regular expression shorthands when convenient:</p><ul><li><p><span class="texMathInline">\Sigma</span> means "any single symbol" from the alphabet.</p><p>For example, if the alphabet is <span class="texMathInline">\Sigma = \left\{\texttt{0},\texttt{1}\right\}</span>, then the regular expression <span class="texMathInline">\Sigma</span> is shorthand for <span class="texMathInline">\texttt{0} \cup \texttt{1}</span></p></li><li><p><span class="texMathInline">\texttt{+}</span> means "1 or more of the preceding regular expression".</p><p>For example, the regular expression <span class="texMathInline">\texttt{0+}</span> is shorthand for <span class="texMathInline">\texttt{00}^*</span></p></li></ul><h4>3<tt>&nbsp;</tt><a name="(part._hw4-induction)"></a>Induction Practice</h4><p>Prove that the following statement is true:</p><p><span class="texMathDisplay">\sum_{i=1}^n i^2 =\frac{n(n+1)(2n+1)}{6}</span></p><p>Use induction on one of the natural numbers in the equation.</p><p><div class="SIntrapara">Make sure to clearly state all the necessary components of such a proof, including:
+</div><div class="SIntrapara"><ol><li><p>which value the induction is "on",</p></li><li><p>base case(s) (Note: it might not be zero?),</p></li><li><p>and inductive case(s) (where each includes an inductive hypothesis)</p></li></ol></div></p><p>In addition, the proof of each case should be clearly explained with a
+Statements and Justifications table, as described in class.</p><h4>4<tt>&nbsp;</tt><a name="(part._hw4-regexp-ind)"></a>Proof by Induction Involving Regular Expressions</h4><p>In lecture, when proving the statement:</p><p><span class="texMathDisplay">\textrm{A language } L\textrm{ is a regular language }</span>
+<span class="texMathDisplay">\textrm{ if and only if }</span>
+<span class="texMathDisplay">\textrm{ there is a regular expression that describes } L</span></p><p>in the proof of the reverse direction, we sketched out a
+conversion function, call it <span class="texMathInline">\textrm{RegExpr2NFA}</span>, that given any
+regular expression as input, converts it to an equivalent NFA.</p><p>For this problem, you must do two things (6 pts each, 1 for each regular expression case):</p><ol><li><p>Write out the full, recursive definition of the
+       <span class="texMathInline">\textrm{RegExpr2NFA}</span> function.
+Its cases and recursive parts should exactly follow
+the cases and recursive parts in the formal definition of regular expressions.</p><p>Further, if you need to write out an NFA, it should be a formal description.
+(You may assume that the alphabet of <span class="texMathInline">L</span> is <span class="texMathInline">\Sigma</span>.)
+Finally, you may assume and use in your definition additional functions
+<span class="texMathInline">\textrm{UNION}_\textsf{NFA}</span>, <span class="texMathInline">\textrm{CONCAT}_\textsf{NFA}</span>, and <span class="texMathInline">\textrm{STAR}_\textsf{NFA}</span>,
+which correspond to the NFA combination operations we defined together in lecture
+when proving that these operations are closed.</p></li><li><p>Prove that the conversion performed by <span class="texMathInline">\textrm{RegExpr2NFA}</span> is "correct".</p><p>Specifically, answer the following questions:</p><ol><li><p>When we say that two things (e.g., a regular expression and an NFA)
+are <span style="font-weight: bold">equivalent</span> in this course, what does this mean?</p></li><li><p>Now, given a meaning for <span style="font-weight: bold">equivalent</span>, we can say
+that the conversion function <span class="texMathInline">\textrm{RegExpr2NFA}</span> is "correct" if its input and
+output are <span style="font-weight: bold">equivalent</span>.  Give a formal (equality) statement for
+this notion of "correctness".</p></li><li><p>Prove the statement that you came up with.
+The proof should be a proof by induction on regular expressions (make sure to say which one).
+Thus, the proof needs to follow the recursive definition of regular expressions
+and should have 6 parts: 3 base cases and 3 recursive cases.
+Make sure that each recursive case declares and uses an inductive hypothesis assumption.</p></li></ol></li></ol><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw3.html" title="backward to &quot;Homework 3&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
