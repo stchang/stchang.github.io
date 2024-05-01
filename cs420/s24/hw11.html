@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 11</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420:<span class="mywbr"> &nbsp;</span> Intro to Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="hw5.html" class="tocviewlink" data-pltdoc="x">Homework 5</a></td></tr><tr><td align="right"></td><td><a href="hw6.html" class="tocviewlink" data-pltdoc="x">Homework 6</a></td></tr><tr><td align="right"></td><td><a href="hw7.html" class="tocviewlink" data-pltdoc="x">Homework 7</a></td></tr><tr><td align="right"></td><td><a href="hw8.html" class="tocviewlink" data-pltdoc="x">Homework 8</a></td></tr><tr><td align="right"></td><td><a href="hw9.html" class="tocviewlink" data-pltdoc="x">Homework 9</a></td></tr><tr><td align="right"></td><td><a href="hw10.html" class="tocviewlink" data-pltdoc="x">Homework 10</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 11</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 11</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw11-not%29" class="tocviewlink" data-pltdoc="x">A Closed Operation for Decidable/<span class="mywbr"> &nbsp;</span>Recognizable Languages?</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw11-mapred-iff%29" class="tocviewlink" data-pltdoc="x">Practice with Mapping Reducibility</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw11-bigo%29" class="tocviewlink" data-pltdoc="x">Big-<wbr></wbr>O Practice</a></td></tr><tr><td align="right">4&nbsp;</td><td><a href="#%28part._hw11-dfa-nfa%29" class="tocviewlink" data-pltdoc="x">DFA-<wbr></wbr>&gt;NFA Running Time</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw11-not%29" class="tocsubseclink" data-pltdoc="x">A Closed Operation for Decidable/<span class="mywbr"> &nbsp;</span>Recognizable Languages?</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw11-mapred-iff%29" class="tocsubseclink" data-pltdoc="x">Practice with Mapping Reducibility</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw11-bigo%29" class="tocsubseclink" data-pltdoc="x">Big-<wbr></wbr>O Practice</a></td></tr><tr><td><span class="tocsublinknumber">4<tt>&nbsp;</tt></span><a href="#%28part._hw11-dfa-nfa%29" class="tocsubseclink" data-pltdoc="x">DFA-<wbr></wbr>&gt;NFA Running Time</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw10.html" title="backward to &quot;Homework 10&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3><a name="(part._hw11)"></a>Homework 11</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Wed, 1 May 2024 11:39:23 -0400</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Wed May 01, 12:00pm EST (noon)
+<span style="font-weight: bold">Due</span>: Wed May 08, 12:00pm EST (noon)</p><p>This assignment continues to explore undecidability, via mapping
+reducibility, and starts to look at time complexity.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw11-not%29" data-pltdoc="x">A Closed Operation for Decidable/Recognizable Languages?</a> (8 + 8 = 16 points)</p></li><li><p><a href="#%28part._hw11-mapred-iff%29" data-pltdoc="x">Practice with Mapping Reducibility</a> (16 points)</p></li><li><p><a href="#%28part._hw11-bigo%29" data-pltdoc="x">Big-O Practice</a> (12 points)</p></li><li><p><a href="#%28part._hw11-dfa-nfa%29" data-pltdoc="x">DFA-&gt;NFA Running Time</a> (14 points)</p></li><li><p>README (2 points)</p></li></ol><p><span style="font-weight: bold">Total</span>: 60 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/668477/assignments/4437421">Gradescope <span class="stt">hw11</span></a>.
+Please assign each page to the correct problem and make sure your solutions are legible.</p><p>A submission must also include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>.</p><h4>1<tt>&nbsp;</tt><a name="(part._hw11-not)"></a>A Closed Operation for Decidable/Recognizable Languages?</h4><p>The <a href="hw3.html#%28part._hw3-not%29" data-pltdoc="x">"Closed" Operation Practice</a> Problem from <a href="hw3.html" data-pltdoc="x">Homework 3</a> introduced the <span class="texMathInline">\mathrm{NEG}</span>
+operation.</p><ol><li><p>Prove that Turing-decidable languages are closed under <span class="texMathInline">\mathrm{NEG}</span>.</p><p>This theorem is needed to complete the undecidability proof in <a href="#%28part._hw11-mapred-iff%29" data-pltdoc="x">Practice with Mapping Reducibility</a>, part 2, above.</p><p><div class="SIntrapara">Specifically:
+</div><div class="SIntrapara"><ul><li><p>Give the if-then statement to be proved,</p></li><li><p>and then prove it.</p><p>Remember that deciders require termination arguments. Also, an Examples Table as shown in class is required to "prove" that a machine recognizes some language.</p></li></ul></div></p></li><li><p>Now let&rsquo;s think about whether Turing-recognizable languages are closed under <span class="texMathInline">\mathrm{NEG}</span>.</p><p>Specifically, answer the following:</p><ol><li><p>Give the <span style="font-weight: bold">If-Then</span> statement that must be proved.</p></li><li><p>Now sketch out a potential proof by giving a table of Statements and
+Justifications, where the last statement is the <span style="font-weight: bold">If-Then</span> statement to be
+proved from above. It should be similar to part 1 above.</p><p>You may run into difficulty when trying to work out the Examples Table justification step. Remember that
+the Examples Table must show all possible combinations of results from
+all of the Turing machines involved in your answer.</p></li><li><p>Based on the Examples Table you
+created, comment on why using the same proof approach as in part 1 won&rsquo;t work. That is, explain why Turing-recognizable languages might <span style="font-weight: bold">not
+be closed</span> under the <span class="texMathInline">\mathrm{NEG}</span> operation ...</p></li></ol></li></ol><h4>2<tt>&nbsp;</tt><a name="(part._hw11-mapred-iff)"></a>Practice with Mapping Reducibility</h4><p>In lecture, we learned a new way to prove undecidability using <span style="font-weight: bold">mapping reducibility</span>.</p><p><div class="SIntrapara">Recall that showing mapping reducibility between two languages requires two steps:
+</div><div class="SIntrapara"><ul><li><p>creating a computable function between the two languages, and</p></li><li><p>showing that the appropriate if-and-only-if statement (which itself has two parts) holds for that computable function.</p></li></ul></div></p><p>We then started to re-prove undecidability for some previously seen
+languages. For this problem, you&rsquo;ll complete what we started for one
+of them.</p><p>Specifically, prove that <span class="texMathInline">E_\textsf{TM}</span> is undecidable using mapping reducibility.</p><p><div class="SIntrapara">To do this you&rsquo;ll need to show that <span class="texMathInline">A_\textsf{TM}</span> is mapping reducible to <span class="texMathInline">\overline{E}_\textsf{TM}</span>. This involves:
+                     </div><div class="SIntrapara"><ol><li><p>understanding the computable function from class,</p></li><li><p>giving the <span style="font-weight: bold">if-and-only-if</span> statement that must be proved, for there to be a mapping reducibility between these two languages,</p></li><li><p>and showing that the computable function from class satisfies this if-and-only-if requirement. Don&rsquo;t forget that proving an if-and-only-if statement requires proving two separate statements. Further, the contrapositive must be used for the reverse direction.</p></li></ol></div></p><p>After you&rsquo;ve established mapping reducibility, complete the
+undecidability proof. As usual, the proof must be in the form of a
+Statements and Justifications Table. (You&rsquo;ll also likely need to use some
+other theorems from lecture to complete the proof.)</p><h4>3<tt>&nbsp;</tt><a name="(part._hw11-bigo)"></a>Big-O Practice</h4><p>Answer TRUE or FALSE for each statement below.</p><p>For each statement that is TRUE, give a value for <span class="texMathInline">c</span> and <span class="texMathInline">n_0</span>
+that satisfies the inequality in the definition of big-O.</p><ol><li><p><span class="texMathInline">n^{99} = 2^{O(n)}</span></p></li><li><p><span class="texMathInline">420^{2n} = 2^{O(n)}</span></p></li><li><p><span class="texMathInline">n-420 = O(\log n)</span></p></li><li><p><span class="texMathInline">n\log n = O(\log n)</span></p></li><li><p><span class="texMathInline">420+n = O(n)</span></p></li><li><p><span class="texMathInline">420 = O(n^3)</span></p></li></ol><h4>4<tt>&nbsp;</tt><a name="(part._hw11-dfa-nfa)"></a>DFA-&gt;NFA Running Time</h4><p>When learning about regular languages, we defined an algorithm
+<span class="texMathInline">\texttt{convert}</span> (in <a href="hw3.html" data-pltdoc="x">Homework 3</a>) to convert a DFA, e.g.,
+<span class="texMathInline">D = (Q_D,\Sigma,\delta_D,q_D,F_D)</span>, to an equivalent NFA, e.g., <span class="texMathInline">N = (Q_N,\Sigma,\delta_N,q_N,F_N)</span>, and we
+used this procedure in the deciders of several languages.</p><p>Compute the running time of the <span class="texMathInline">\texttt{convert}</span>
+algorithm. Express your answer using big-O notation in terms a
+variable <span class="texMathInline">n = |Q_D|</span> representing the number of states in the DFA.
+Is this a polynomial time algorithm?</p><p>Structure your solution according to the components of the DFA. In
+other words, your solution should say how many steps it takes to
+compute <span class="texMathInline">Q_N</span> from <span class="texMathInline">Q_D</span>, how many steps it takes to compute
+<span class="texMathInline">\delta_N</span> from <span class="texMathInline">\delta_D</span>, etc., and then add them all
+together. As another hint, to calculate this runtime, you want to be
+thinking about the size of each of the computed NFA parts, in
+comparison to their DFA counterparts.</p><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw10.html" title="backward to &quot;Homework 10&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420: Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
