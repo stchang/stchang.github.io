@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 12</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS622:<span class="mywbr"> &nbsp;</span> Theory of Formal Languages</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="hw5.html" class="tocviewlink" data-pltdoc="x">Homework 5</a></td></tr><tr><td align="right"></td><td><a href="hw6.html" class="tocviewlink" data-pltdoc="x">Homework 6</a></td></tr><tr><td align="right"></td><td><a href="hw7.html" class="tocviewlink" data-pltdoc="x">Homework 7</a></td></tr><tr><td align="right"></td><td><a href="hw8.html" class="tocviewlink" data-pltdoc="x">Homework 8</a></td></tr><tr><td align="right"></td><td><a href="hw9.html" class="tocviewlink" data-pltdoc="x">Homework 9</a></td></tr><tr><td align="right"></td><td><a href="hw10.html" class="tocviewlink" data-pltdoc="x">Homework 10</a></td></tr><tr><td align="right"></td><td><a href="hw11.html" class="tocviewlink" data-pltdoc="x">Homework 11</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 12</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 12</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw12-schedule.P%29" class="tocviewlink" data-pltdoc="x">Scheduling in P?</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw12-schedule.N.P%29" class="tocviewlink" data-pltdoc="x">Scheduling Courses in NP?</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw12-dynamic%29" class="tocviewlink" data-pltdoc="x">Dynamic Progamming</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw12-schedule.P%29" class="tocsubseclink" data-pltdoc="x">Scheduling in P?</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw12-schedule.N.P%29" class="tocsubseclink" data-pltdoc="x">Scheduling Courses in NP?</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw12-dynamic%29" class="tocsubseclink" data-pltdoc="x">Dynamic Progamming</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw11.html" title="backward to &quot;Homework 11&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS622: Theory of Formal Languages&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3><a name="(part._hw12)"></a>Homework 12</h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Wed, 8 May 2024 12:08:07 -0400</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Wed May 08, 12:00pm EST (noon)</p><p><span style="font-weight: bold">Due</span>: Wed May 15, 12:00pm EST (noon) (no late hw accepted!)</p><p>This assignment explores the time complexity classes P and NP.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw12-schedule.P%29" data-pltdoc="x">Scheduling in P?</a> (6 + 6 + 6 = 18 pts)</p></li><li><p><a href="#%28part._hw12-schedule.N.P%29" data-pltdoc="x">Scheduling Courses in NP?</a> (9 + 9 = 18 points)</p></li><li><p><a href="#%28part._hw12-dynamic%29" data-pltdoc="x">Dynamic Progamming</a> (10 + 10 = 20 points)</p></li><li><p>README (4 points)</p></li></ol><p><span style="font-weight: bold">Total</span>: 60 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/716597/assignments/4464572">Gradescope <span class="stt">hw12</span></a>.
+Please assign each page to the correct problem and make sure your solutions are legible.</p><p>A submission must also include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>.</p><h4>1<tt>&nbsp;</tt><a name="(part._hw12-schedule.P)"></a>Scheduling in P?</h4><ol><li><p>Image that WISER is down, so UMB has hired you to compute
+possible course schedules for the school.</p><p>If there are 100 different courses and 100 different classrooms,
+compute the maximum number of possible schedules to consider in a
+brute-force algorithm to find a valid assignment of courses to
+classrooms. A valid assignment is unspecified at this time (except
+that all classrooms must be filled), but you may assume that checking
+the validity of any one assignment of courses to classrooms takes
+constant time. Explain why this algorithm is in <span class="texMathInline">\textbf{P}</span>.</p></li><li><p>Now imagine the brute-force algorithm from above is generalized
+to <span class="texMathInline">n</span> different courses and <span class="texMathInline">n</span> different classrooms. Explain the
+worst case run time of this algorithm to find valid assignment, in terms of <span class="texMathInline">n</span>, and explain
+why it is no longer in <span class="texMathInline">\textbf{P}</span>.</p></li><li><p>Finally, assume that checking the validity of one assignment
+gives enough information to eliminate half of the remaining unchecked
+assignments (round down). Give an algorithm, using this new
+knowledge after each check, runs in at most polynomial time.</p></li></ol><h4>2<tt>&nbsp;</tt><a name="(part._hw12-schedule.N.P)"></a>Scheduling Courses in NP?</h4><p>Now, for the same problem as in <a href="#%28part._hw12-schedule.P%29" data-pltdoc="x">Scheduling in P?</a>, assume that
+each course has some number of students enrolled and as well as some
+classrooms where the instructor does not want to teach in (if it
+helps, assume the classrooms are numbered from 1 to <span class="texMathInline">n</span> and the
+instructor preferences is some subset of all classrooms).
+And assume that each classroom has a maximum capacity.</p><p><div class="SIntrapara">Define a valid assignment of courses to classrooms as follows:
+</div><div class="SIntrapara"><ul><li><p>each course is only assigned to one classroom</p></li><li><p>each course is not assigned to a classroom where the instructor does not want to teach</p></li><li><p>each course is assigned to a classroom whose max capacity is greater than or equal to the number of enrolled students</p></li></ul></div></p><p>Give <span style="font-weight: bold">two</span> separate proofs that the problem of finding a valid assignment of courses to classrooms is in <span class="texMathInline">\textbf{NP}</span>.</p><p>Be sure to structure each proof in the form of a Statements and
+Justifications table. In particular be careful about the
+justifications for each proof (they won&rsquo;t be the same).  The
+"Examples Table" for each proof requires at least 1 example not in the language
+and 1 example in the language.</p><p><div class="SIntrapara">Caveats:
+</div><div class="SIntrapara"><ul><li><p>Creating a verifier requires a certificate.
+Make sure to be precise about explaining what kind of value
+the certificate is and what it represents.</p></li><li><p>Creating a non-deterministic TM requires a precise
+explanation about when the TM uses non-determinism, i.e., exactly how and
+when the computation branches.</p></li></ul></div></p><h4>3<tt>&nbsp;</tt><a name="(part._hw12-dynamic)"></a>Dynamic Progamming</h4><p>Assume you have a python program consisting of <span class="texMathInline">n</span> functions that
+take number inputs and produce number outputs. Now assume you are
+asked, using some some given input, to find the sequence of function
+calls that produces the smallest result (each function may be called
+at most once, but not every function needs to be called).</p><ol><li><p>Give a brute-force algorithm for finding this sequence of function calls</p></li><li><p>Give a polynomial time algorithm for finding this sequence of function calls. Your answer must use dynamic programming.</p></li></ol><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw11.html" title="backward to &quot;Homework 11&quot;" data-pltdoc="x">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS622: Theory of Formal Languages&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
