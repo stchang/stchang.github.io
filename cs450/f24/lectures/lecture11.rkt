@@ -2,6 +2,9 @@
 
 (require 2htdp/image)
 
+;; CS450 Fall 2024 section 2
+;; Oct 9 Wed Lecture 11 - Function Arithmetic and the Lambda Calculus
+
 ((compose sqrt add1) 8)
 
 (apply
