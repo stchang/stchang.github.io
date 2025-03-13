@@ -180,3 +180,18 @@
 
 (check-equal? (cnum->num (cfirst (cpair cone ctwo))) 1)
 (check-equal? (cnum->num (csecond (cpair cone ctwo))) 2)
+
+;; program that keeps producing "itself", i.e., an infinite loop
+#;((λ (x) (x x))
+   (λ (x) (x x)))
+
+;; program that prints itself (with helper function)
+(define (print2x str)
+  (printf "(~a\n ~v)\n" str str))
+
+((λ (x) (print2x x))
+ "(λ (x) (print2x x))")
+
+;; program that prints itself (inlined)
+((λ (x) (printf "(~a\n ~v)\n" x x))
+ "(λ (x) (printf \"(~a\\n ~v)\\n\" x x))")
