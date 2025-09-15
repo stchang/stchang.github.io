@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 2</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420 /<span class="mywbr"> &nbsp;</span> CS620:<span class="mywbr"> &nbsp;</span> Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 2</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 2</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw2-reglang1%29" class="tocviewlink" data-pltdoc="x">DFAs and Regular Languages</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw2-reglang2%29" class="tocviewlink" data-pltdoc="x">Is It A Regular Language?</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw2-computation%29" class="tocviewlink" data-pltdoc="x">DFAs Can Do "Real" Computation</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw2-reglang1%29" class="tocsubseclink" data-pltdoc="x">DFAs and Regular Languages</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw2-reglang2%29" class="tocsubseclink" data-pltdoc="x">Is It A Regular Language?</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw2-computation%29" class="tocsubseclink" data-pltdoc="x">DFAs Can Do "Real" Computation</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw1.html" title="backward to &quot;Homework 1&quot;" data-pltdoc="x" rel="prev">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420 / CS620: Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3 class="heading"><a name="(part._hw2)"></a>Homework 2<span class="button-group"><a href="#(part._hw2)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Mon, 15 Sep 2025 11:23:29 -0400</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Mon Sept 15, 12:00pm EDT (noon)
+<span style="font-weight: bold">Due</span>: Mon Sept 22, 12:00pm EDT (noon)</p><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p>Note: Assignments are not officially "released"
+until&#8212;<wbr></wbr>and are subject to change without notice up to&#8212;<wbr></wbr>the indicated
+"Out" date and time. If an assignment is posted early, students may
+look ahead but are responsible for ensuring that they are always
+working with the most recent version of the homework.</p></blockquote></blockquote></blockquote><p>This assignment continues to explore deterministic finite automata (DFAs)
+and regular languages.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw2-reglang1%29" data-pltdoc="x">DFAs and Regular Languages</a> (12 points)</p></li><li><p><a href="#%28part._hw2-reglang2%29" data-pltdoc="x">Is It A Regular Language?</a> (12 points)</p></li><li><p><a href="#%28part._hw2-computation%29" data-pltdoc="x">DFAs Can Do "Real" Computation</a> (10 points)</p></li><li><p>README (1 point)</p></li></ol><p><span style="font-weight: bold">Maximum</span>: 35 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/1071761/assignments/6739969">Gradescope <span class="stt">hw2</span></a>.
+Please assign each page to the correct problem and make sure your solutions are legible.</p><p>A submission must also include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>.</p><h4 class="heading">1<tt>&nbsp;</tt><a name="(part._hw2-reglang1)"></a>DFAs and Regular Languages<span class="button-group"><a href="#(part._hw2-reglang1)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h4><p>Let the language recognized by DFA <span class="texMathInline">T</span> from <a href="hw1.html" data-pltdoc="x">Homework 1</a> problem
+<a href="hw1.html#%28part._hw1-dfaformal%29" data-pltdoc="x">DFA Formal Description</a> be the following set of strings:</p><p><span class="texMathDisplay">L_T=\{\texttt{420},\texttt{620}\}</span></p><p>Prove that the language <span class="texMathInline">L_T</span> is a <span style="font-weight: bold">regular language</span>.</p><blockquote class="SubFlow"><p><span style="font-weight: bold">Important:</span> Before attempting the proof, make sure to understand
+what this problem is asking. This means you must know the precise
+definitions of the terms used in this problem, and all notation, before you can begin
+solving this question.</p></blockquote><p>For example, make sure you know the precise formal
+definition of: <span style="font-weight: bold">string</span>, <span style="font-weight: bold">language</span>, <span style="font-weight: bold">recognize</span>,
+<span style="font-weight: bold">regular language</span>, etc.</p><blockquote class="SubFlow"><p>Your proof must be in the form of a <span style="font-weight: bold">Statements</span> and
+                <span style="font-weight: bold">Justifications</span> table, as presented in class.</p><blockquote class="SubFlow"><p>If your answer includes designing a DFA, you may submit a state
+diagram instead of a formal description of the machine.</p></blockquote><p>You may also refer to DFAs already created in class or previous
+homework problems, if appropriate. There is no need to re-define a previously-defined definition.</p><p><div class="SIntrapara">To "prove" that a DFA recognizes a language, the
+justification (as <a href="lectures/lecture04.pdf">shown in lecture</a>) must be a three-column table showing:
+</div><div class="SIntrapara"><ul><li><p><span style="font-weight: bold">three</span> strings that are both "in the language" and "accepted by the DFA", and</p></li><li><p><span style="font-weight: bold">three</span> strings that are <span class="emph">not</span> "in the language" and <span class="emph">not</span> "accepted by the DFA".</p></li></ul></div><div class="SIntrapara">The key is that for each example string, the entries in the "in the
+language?" column and the "accepted by DFA?" column should match. The
+strings should ideally "test" as many different transition paths
+through the DFA as possible. (This should also tell you whether the
+strings you came up with in parts 1 and 2 are "good" examples or not.)</div></p></blockquote><h4 class="heading">2<tt>&nbsp;</tt><a name="(part._hw2-reglang2)"></a>Is It A Regular Language?<span class="button-group"><a href="#(part._hw2-reglang2)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h4><p>Here is a <span style="font-weight: bold">language</span> definition:</p><p><span class="texMathDisplay">L_{AC} = \{w\mid w\textrm{ is a valid area code}\}</span></p><p>You may assume that strings in the language contain only
+characters from alphabet <span class="texMathInline">\{\texttt{2},\texttt{3},\texttt{4}\}</span>.</p><ol><li><p>Come up with 3 strings in the language.</p></li><li><p>Come up with 3 strings not in the language.</p><p>For this problem, for parts 1 and 2, you are allowed to post examples
+to Piazza for clarification if you are unsure.</p></li><li><p>Prove that the language is a <span style="font-weight: bold">regular language</span>.</p><blockquote class="SubFlow"><p><span style="font-weight: bold">Important:</span> Before attempting the proof, make sure to understand
+what this problem is asking. This means you must know the precise
+definitions of the terms used in this problem, and all notation, before you can begin
+solving this question.</p></blockquote><p>For example, make sure you know the precise formal
+definition of: <span style="font-weight: bold">string</span>, <span style="font-weight: bold">language</span>, <span style="font-weight: bold">regular
+language</span>, etc. Further, you need to know how to read the
+set (builder) notation above and what it means for something to be
+<span style="font-weight: bold">in</span> and <span style="font-weight: bold">not in</span> a set.</p><blockquote class="SubFlow"><p>Your proof must be in the form of a <span style="font-weight: bold">Statements</span> and
+                <span style="font-weight: bold">Justifications</span> table, as presented in class.</p><blockquote class="SubFlow"><p>If your answer includes designing a DFA, you may submit a state
+diagram instead of a formal description of the machine.</p></blockquote><p>You may also refer to DFAs already created in class or previous
+homework problems, if appropriate. There is no need to re-define a previously-defined definition.</p><p><div class="SIntrapara">To "prove" that a DFA recognizes a language, the
+justification (as <a href="lectures/lecture04.pdf">shown in lecture</a>) must be a three-column table showing:
+</div><div class="SIntrapara"><ul><li><p><span style="font-weight: bold">three</span> strings that are both "in the language" and "accepted by the DFA", and</p></li><li><p><span style="font-weight: bold">three</span> strings that are <span class="emph">not</span> "in the language" and <span class="emph">not</span> "accepted by the DFA".</p></li></ul></div><div class="SIntrapara">The key is that for each example string, the entries in the "in the
+language?" column and the "accepted by DFA?" column should match. The
+strings should ideally "test" as many different transition paths
+through the DFA as possible. (This should also tell you whether the
+strings you came up with in parts 1 and 2 are "good" examples or not.)</div></p></blockquote></li></ol><h4 class="heading">3<tt>&nbsp;</tt><a name="(part._hw2-computation)"></a>DFAs Can Do "Real" Computation<span class="button-group"><a href="#(part._hw2-computation)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h4><p>Here is an example showing that DFAs can perform "real" computation.</p><p>Assume that the following is an alphabet of "domino" symbols (one
+could easily use unicode characters to represent such an alphabet):</p><p><img src="dominos20.png" alt="" width="298" height="35"/></p><p>Now assume we have a sequences of such dominoes, where the top row of
+digits are interpreted together as a binary number (leftmost digit is
+most significant, i.e., "big-endian"). The bottom row of digits are
+also interpreted in the same way.</p><p>For example in the following domino sequence:</p><p><img src="dominos-example.png" alt="" width="149" height="61"/></p><p>the "top row" binary number would be <span class="stt">011</span> (or 3
+in base ten) and the "bottom row" binary number would be <span class="stt">101</span> (5 in
+base ten).</p><p>Let <span class="texMathInline">L_{neq}</span> be a language consisting of sequences of dominos
+where:</p><p><span class="texMathDisplay">L_{neq} = \{w\mid w \textrm{ is a sequence of dominoes where top row} \neq \textrm{bottom row}\}</span></p><ol><li><p>Come up with 3 strings in the language.</p></li><li><p>Come up with 3 strings not in the language.</p></li><li><p>Prove that <span class="texMathInline">L_{neq}</span> is a <span style="font-weight: bold">regular language</span>.</p><blockquote class="SubFlow"><p>Your proof must be in the form of a <span style="font-weight: bold">Statements</span> and
+                <span style="font-weight: bold">Justifications</span> table, as presented in class.</p><blockquote class="SubFlow"><p>If your answer includes designing a DFA, you may submit a state
+diagram instead of a formal description of the machine.</p></blockquote><p>You may also refer to DFAs already created in class or previous
+homework problems, if appropriate. There is no need to re-define a previously-defined definition.</p><p><div class="SIntrapara">To "prove" that a DFA recognizes a language, the
+justification (as <a href="lectures/lecture04.pdf">shown in lecture</a>) must be a three-column table showing:
+</div><div class="SIntrapara"><ul><li><p><span style="font-weight: bold">three</span> strings that are both "in the language" and "accepted by the DFA", and</p></li><li><p><span style="font-weight: bold">three</span> strings that are <span class="emph">not</span> "in the language" and <span class="emph">not</span> "accepted by the DFA".</p></li></ul></div><div class="SIntrapara">The key is that for each example string, the entries in the "in the
+language?" column and the "accepted by DFA?" column should match. The
+strings should ideally "test" as many different transition paths
+through the DFA as possible. (This should also tell you whether the
+strings you came up with in parts 1 and 2 are "good" examples or not.)</div></p></blockquote></li></ol><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw1.html" title="backward to &quot;Homework 1&quot;" data-pltdoc="x" rel="prev">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420 / CS620: Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
