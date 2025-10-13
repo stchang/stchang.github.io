@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 6</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script><!--[if IE 6]><style type="text/css">.SIEHidden { overflow: hidden; }</style><![endif]--></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420 /<span class="mywbr"> &nbsp;</span> CS620:<span class="mywbr"> &nbsp;</span> Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="hw5.html" class="tocviewlink" data-pltdoc="x">Homework 5</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 6</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 6</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw6-closed%29" class="tocviewlink" data-pltdoc="x">Second Chance! Regular Langs Closed Under MAKECS?</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw6-induction2%29" class="tocviewlink" data-pltdoc="x">More Induction Practice</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw6-nonreglang%29" class="tocviewlink" data-pltdoc="x">Proving That a Language is Not a Regular Language</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<tt>&nbsp;</tt></span><a href="#%28part._hw6-closed%29" class="tocsubseclink" data-pltdoc="x">Second Chance! Regular Langs Closed Under MAKECS?</a></td></tr><tr><td><span class="tocsublinknumber">2<tt>&nbsp;</tt></span><a href="#%28part._hw6-induction2%29" class="tocsubseclink" data-pltdoc="x">More Induction Practice</a></td></tr><tr><td><span class="tocsublinknumber">3<tt>&nbsp;</tt></span><a href="#%28part._hw6-nonreglang%29" class="tocsubseclink" data-pltdoc="x">Proving That a Language is Not a Regular Language</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw5.html" title="backward to &quot;Homework 5&quot;" data-pltdoc="x" rel="prev">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420 / CS620: Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><h3 class="heading"><a name="(part._hw6)"></a>Homework 6<span class="button-group"><a href="#(part._hw6)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h3><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Mon, 13 Oct 2025 11:53:06 -0400</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Mon Oct 13, 12:00pm EDT (noon)
+<span style="font-weight: bold">Due</span>: Mon Oct 20, 12:00pm EDT (noon)</p><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p>Note: Assignments are not officially "released"
+until&#8212;<wbr></wbr>and are subject to change without notice up to&#8212;<wbr></wbr>the indicated
+"Out" date and time. If an assignment is posted early, students may
+look ahead but are responsible for ensuring that they are always
+working with the most recent version of the homework.</p></blockquote></blockquote></blockquote><p>This assignment explores non-regular languages.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw6-closed%29" data-pltdoc="x">Second Chance! Regular Langs Closed Under MAKECS?</a> (up to 12 extra points)</p></li><li><p><a href="#%28part._hw6-induction2%29" data-pltdoc="x">More Induction Practice</a> (up to 12 extra points)</p></li><li><p><a href="#%28part._hw6-nonreglang%29" data-pltdoc="x">Proving That a Language is Not a Regular Language</a> (12 points)</p></li><li><p>README (2 point)</p></li></ol><p><span style="font-weight: bold">Total</span>: 26 (out of 14) points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/1071761/assignments/6959758">Gradescope <span class="stt">hw6</span></a>.
+Please assign each page to the correct problem and make sure your solutions are legible.</p><p>A submission must also include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>.</p><h4 class="heading">1<tt>&nbsp;</tt><a name="(part._hw6-closed)"></a>Second Chance! Regular Langs Closed Under MAKECS?<span class="button-group"><a href="#(part._hw6-closed)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h4><p><span style="font-weight: bold">NOTE</span>: You may only attempt this extra credit if you scored
+<span style="font-weight: bold">8 or lower</span> on the <a href="hw3.html#%28part._hw3-closed%29" data-pltdoc="x">Are Regular Languages Closed Under <span class="texMathInline">\mathrm{MAKECS}</span>?</a> Problem in
+<a href="hw3.html" data-pltdoc="x">Homework 3</a>. (You may not answer both extra credit questions.)</p><p>Many <a href="hw3.html" data-pltdoc="x">Homework 3</a> submissions contained invalid or incorrect or
+incomplete answers to the <a href="hw3.html#%28part._hw3-closed%29" data-pltdoc="x">Are Regular Languages Closed Under <span class="texMathInline">\mathrm{MAKECS}</span>?</a> Problem. But
+students have been requesting a second chance to demonstrate their
+knowledge of the course topics, so we are giving that chance in the
+form of extra credit for this assignment.</p><p>For this first extra credit problem, you should re-do the
+<a href="hw3.html#%28part._hw3-closed%29" data-pltdoc="x">Are Regular Languages Closed Under <span class="texMathInline">\mathrm{MAKECS}</span>?</a> Problem from <a href="hw3.html" data-pltdoc="x">Homework 3</a>.</p><p>Your answer to this question should be submitted as a part of your
+<a href="" data-pltdoc="x">Homework 6</a> submission, as a completely new answer, but you will only
+receive the extra credit if the submitted answer improves on or fixes
+the problems from your previous <a href="hw3.html" data-pltdoc="x">Homework 3</a> submission.</p><p>Note that you must answer this question in the context of <a href="hw3.html" data-pltdoc="x">Homework 3</a>. This means:</p><ul><li><p>The proof should begin by stating the IF-THEN Statement that is being proved. Any modification to the required Statement to Prove will result in an invalid proof.</p></li><li><p>Then, the proof itself should be in a properly formatted Statements / Justifications Table (as described in Chapter 1.2 of the HMU textbook), where the Statement to Prove from above should be the last Statement that is proved.</p></li><li><p>Each line of the proof must be properly justified and logically follow from previous steps. Any extraneous statements or comments will make the proof invalid.</p></li><li><p>Be careful to only use acceptable Justifications. Any extraneous sentences or comments or external theorems not covered will make the proof invalid.</p></li><li><p>Since the question was from hw3, you may only use DFA constructions and theorems about DFAs to answer the question.</p></li><li><p>Also, the only acceptable Justification for a statement like "DFA M recognizes language L" is a properly formatted Examples Table with correctly labeled columns and proper explanations for each example if necessary.</p></li><li><p>You may not use theorems about concatentation or finite languages or anything that came after <a href="hw3.html" data-pltdoc="x">Homework 3</a>.</p></li></ul><h4 class="heading">2<tt>&nbsp;</tt><a name="(part._hw6-induction2)"></a>More Induction Practice<span class="button-group"><a href="#(part._hw6-induction2)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h4><p><span style="font-weight: bold">NOTE</span>: You may only attempt this extra credit if you scored
+<span style="font-weight: bold">9 or higher</span> on the <a href="hw3.html#%28part._hw3-closed%29" data-pltdoc="x">Are Regular Languages Closed Under <span class="texMathInline">\mathrm{MAKECS}</span>?</a> Problem in <a href="hw3.html" data-pltdoc="x">Homework 3</a>.
+You may not answer both extra credit questions.</p><p>The proof from class that used regular expressions to prove that the
+regular languages are closed under the reverse operation included one
+unjustified statement, which is that the union and reverse operations
+commute. That is, changing the order in which the operations are
+applied to a language does not change the final result.</p><p>This questions asks you to prove this property, for extra credit.</p><p>Specifically, prove the following statement,</p><p><span class="texMathInline">\texttt{rev}(A\cup B) = \texttt{rev}(A) \cup \texttt{rev}(B)</span></p><p>where <span class="texMathInline">A</span> and <span class="texMathInline">B</span> are any language and <span class="texMathInline">\texttt{rev}(L)= L^\mathcal{R}</span> from class.</p><p>Note: this proof should apply to any languages and should not be
+restricted to regular languages. This means that the proof should not
+use DFAs or regular expressions, or anything else associated with
+regular languages.</p><p>The proof should be by induction on the size of one of the
+languages. As usual, make sure to state what value the induction is
+on. In this problem, it will be especially important to use recursion
+properly, that is, a recursive piece of a definition (or function, or
+proof) must be on a "smaller" piece of the problem.</p><p>You might find it useful to first re-define <span class="texMathInline">\texttt{rev}</span> recursively, on the size of the input.</p><p>You might also find it useful to prove the following (related) lemma:</p><p><span class="texMathInline">\texttt{rev}(L\cup\{s\}) = \texttt{rev}(L)\cup \texttt{rev}(\{s\})</span></p><p>where <span class="texMathInline">L</span> is any language and <span class="texMathInline">s</span> is a single string.</p><h4 class="heading">3<tt>&nbsp;</tt><a name="(part._hw6-nonreglang)"></a>Proving That a Language is Not a Regular Language<span class="button-group"><a href="#(part._hw6-nonreglang)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h4><p>Here is a language:</p><p><span class="texMathDisplay">L_{nneq} = \left\{x\!\!\mathtt{\neq}\!\!y\mid x\textrm{ and }y\textrm{ are binary numbers and the overall statement is } \mathrm{False}\right\}</span></p><p>Assume the alphabet is <span class="texMathInline">\Sigma = \left\{0,1,\mathtt{\neq}\right\}</span>.</p><ol><li><p>Come up with examples, both in the language and not in the language, to make sure you understand the question (come up with enough examples until you understand the language).</p></li><li><p>Show that language <span class="texMathInline">L_{nneq}</span> is <span style="font-weight: bold">not</span> a regular language.</p><p>Use the Pumping Lemma and proof by contradiction. Make sure your proof
+has all the correct components. It should also be presented as a
+Statements and Justifications Table that starts with assuming the
+negation of the Statement to Prove. Then, the proof should proceed
+according to a standard proof, EXCEPT the proof should eventually have
+two statements that contradict each other. This contradiction allows
+you to conclude that the original statement to prove is true.</p><p>The key to the contradiction is finding a counterexample that is in
+the language, but does not satisfy the conditions of the pumping
+lemma. Proving this should be a separate part of the proof that is
+referenced from the main proof table. This part of the solution should
+analyze all possible splittings of the counterexample into three
+pieces, as described by the pumping lemma, and check whether there is
+any split where the middle piece is "pumpable" and the resulting
+string is still in the language.</p></li></ol><p><span class="emph">Interesting sidenote</span>: This problem is feels similar to the
+<a href="hw2.html#%28part._hw2-computation%29" data-pltdoc="x">DFAs Can Do "Real" Computation</a> problem from <a href="hw1.html" data-pltdoc="x">Homework 1</a>. But there, the
+language was regular. Here, by rearranging the characters making up
+the strings in the language, we now have a non-regular language that
+cannot be recognized by DFAs or NFAs!</p><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw5.html" title="backward to &quot;Homework 5&quot;" data-pltdoc="x" rel="prev">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420 / CS620: Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
