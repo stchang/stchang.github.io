@@ -15,6 +15,24 @@ AddOnLoad(function() {
     }
 })
 
+// for copies that start in Racket code, strip out extra newlines
+AddOnLoad(function() {
+  const codeBlocks = document.getElementsByClassName("SCodeFlow");
+  for (var i = 0; i < codeBlocks.length; i++) {
+    var codeBlock = codeBlocks[i];
+    console.log("add");
+    codeBlock.addEventListener('copy', function(e) {
+      var selection = window.getSelection();
+      var text = selection.toString();
+      var codeText = text.replace(/\n\n/g, '\n');
+      if (text != codeText) {
+        e.preventDefault();
+        e.clipboardData.setData('text/plain', codeText);
+      }
+    })
+  }
+})
+
 // cache of source urls
 var cache = {};
 
@@ -236,12 +254,15 @@ function AddPartTitleOnClick(elem) {
         else
             elem.parentNode.appendChild(info);
 
-        /* Clicking the header shows the explanation element: */
-        elem.onclick = function () {
-            if (info.style.display == "none")
+        /* Clicking the information button shows the explanation element: */
+        const heading = elem.querySelector('.heading-source');
+        if (heading) {
+          heading.onclick = function () {
+            if (info.style.display === "none")
                 info.style.display = "block";
             else
                 info.style.display = "none";
+          }
         }
     }
 }
