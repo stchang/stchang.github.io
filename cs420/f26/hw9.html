@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=0.8"/><title>Homework 9</title><link rel="stylesheet" type="text/css" href="scribble.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-style.css" title="default"/><link rel="stylesheet" type="text/css" href="manual-racket.css" title="default"/><script type="text/javascript" src="scribble-common.js"></script><script type="text/javascript">
+(function() {
+  document.write('<link rel="stylesheet" href="katex/katex.min.css" />');
+})();(function() {document.write('<scr' + 'ipt type="text/javascript" src="katex/katex.min.js"></scr' + 'ipt>');})();(function(f) {
+  // A "simple" onLoad function
+  if (window.document.readyState == "complete") {
+    f();
+  } else if (window.document.addEventListener) {
+    window.document.addEventListener("DOMContentLoaded", f, false);
+  } else if (window.attachEvent) {
+    window.attachEvent("onreadystatechange", function() {
+      if (window.document.readyState == "complete") {
+        f();
+      }
+    });
+  } else {
+    var oldLoad = window.onload;
+    if (typeof(oldLoad) == "function") {
+      window.onload = function() {
+        try {
+          oldLoad();
+        } finally {
+          f();
+        }
+      };
+    } else {
+      window.onload = f;
+    }
+  }
+})(function() {
+  // This is an ugly way to change the doctype, in case the scribble document
+  // did not use (with-html5).
+  if (!(document.doctype && document.doctype.publicId == '')) {
+    if (console && console.log) {
+      console.log("Re-wrote the document to use the HTML5 doctype.\n"
+                  + "  Consider using the following declaration:\n"
+                  + "      @title[#:style (with-html5 manual-doc-style)]{…}");
+    }
+    var wholeDoc = '<!doctype HTML>\n' + document.documentElement.outerHTML;
+    document.open();
+    document.clear();
+    document.write(wholeDoc);
+  }
+  var inlineElements = document.getElementsByClassName("texMathInline");
+  for (var i = 0; i < inlineElements.length; i++) {
+    var e = inlineElements[i];
+    katex.render(e.textContent, e, { displayMode:false, throwOnError:false });
+  }
+  var displayElements = document.getElementsByClassName("texMathDisplay");
+  for (var i = 0; i < displayElements.length; i++) {
+    var e = displayElements[i];
+    katex.render(e.textContent, e, { displayMode:true, throwOnError:false });
+  }
+});
+</script><script type="text/javascript" src="manual-racket.js"></script></head><body id="scribble-racket-lang-org"><div class="tocset"><div class="tocview"><div class="tocviewlist tocviewlisttopspace"><div class="tocviewtitle"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_0&quot;);">&#9660;</a></td><td></td><td><a href="index.html" class="tocviewlink" data-pltdoc="x">CS420 :<span class="mywbr"> &nbsp;</span> Intro to Theory of Computation</a></td></tr></table></div><div class="tocviewsublisttop" style="display: block;" id="tocview_0"><table cellspacing="0" cellpadding="0"><tr><td align="right"></td><td><a href="info.html" class="tocviewlink" data-pltdoc="x">Course Info</a></td></tr><tr><td align="right"></td><td><a href="logistics.html" class="tocviewlink" data-pltdoc="x">Logistics</a></td></tr><tr><td align="right"></td><td><a href="policies.html" class="tocviewlink" data-pltdoc="x">Course Policies</a></td></tr><tr><td align="right"></td><td><a href="hw0.html" class="tocviewlink" data-pltdoc="x">Homework 0</a></td></tr><tr><td align="right"></td><td><a href="hw1.html" class="tocviewlink" data-pltdoc="x">Homework 1</a></td></tr><tr><td align="right"></td><td><a href="hw2.html" class="tocviewlink" data-pltdoc="x">Homework 2</a></td></tr><tr><td align="right"></td><td><a href="hw3.html" class="tocviewlink" data-pltdoc="x">Homework 3</a></td></tr><tr><td align="right"></td><td><a href="hw4.html" class="tocviewlink" data-pltdoc="x">Homework 4</a></td></tr><tr><td align="right"></td><td><a href="hw5.html" class="tocviewlink" data-pltdoc="x">Homework 5</a></td></tr><tr><td align="right"></td><td><a href="hw6.html" class="tocviewlink" data-pltdoc="x">Homework 6</a></td></tr><tr><td align="right"></td><td><a href="hw7.html" class="tocviewlink" data-pltdoc="x">Homework 7</a></td></tr><tr><td align="right"></td><td><a href="hw8.html" class="tocviewlink" data-pltdoc="x">Homework 8</a></td></tr><tr><td align="right"></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 9</a></td></tr></table></div></div><div class="tocviewlist"><table cellspacing="0" cellpadding="0"><tr><td style="width: 1em;"><a href="javascript:void(0);" title="Expand/Collapse" class="tocviewtoggle" onclick="TocviewToggle(this,&quot;tocview_1&quot;);">&#9658;</a></td><td></td><td><a href="" class="tocviewselflink" data-pltdoc="x">Homework 9</a></td></tr></table><div class="tocviewsublistbottom" style="display: none;" id="tocview_1"><table cellspacing="0" cellpadding="0"><tr><td align="right">1&nbsp;</td><td><a href="#%28part._hw9-notcfl%29" class="tocviewlink" data-pltdoc="x">Not a Context-<wbr></wbr>Free Language?</a></td></tr><tr><td align="right">2&nbsp;</td><td><a href="#%28part._hw9-tr%29" class="tocviewlink" data-pltdoc="x">A Turing-<wbr></wbr>Recognizable Language Example</a></td></tr><tr><td align="right">3&nbsp;</td><td><a href="#%28part._hw9-decidable%29" class="tocviewlink" data-pltdoc="x">A Decidable Language</a></td></tr></table></div></div></div><div class="tocsub"><div class="tocsubtitle">On this page:</div><table class="tocsublist" cellspacing="0"><tr><td><span class="tocsublinknumber">1<span class="stt">&nbsp;</span></span><a href="#%28part._hw9-notcfl%29" class="tocsubseclink" data-pltdoc="x">Not a Context-<wbr></wbr>Free Language?</a></td></tr><tr><td><span class="tocsublinknumber">2<span class="stt">&nbsp;</span></span><a href="#%28part._hw9-tr%29" class="tocsubseclink" data-pltdoc="x">A Turing-<wbr></wbr>Recognizable Language Example</a></td></tr><tr><td><span class="tocsublinknumber">3<span class="stt">&nbsp;</span></span><a href="#%28part._hw9-decidable%29" class="tocsubseclink" data-pltdoc="x">A Decidable Language</a></td></tr></table></div></div><div class="maincolumn"><div class="main"><div class="navsettop"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw8.html" title="backward to &quot;Homework 8&quot;" data-pltdoc="x" rel="prev">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420 : Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div><section class="SsectionLevel2" id="section 0"><h2 class="heading"><a name="(part._hw9)"></a>Homework 9<span class="button-group"><a href="#(part._hw9)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h2><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p><span class="emph">Last updated: </span>Fri, 13 Nov 2026 18:48:56 -0500</p></blockquote></blockquote></blockquote><p><span style="font-weight: bold">Out</span>: Sat Nov 14, 12:30pm EST
+<span style="font-weight: bold">Due</span>: Sat Nov 21, 12:30pm EST</p><blockquote class="refpara"><blockquote class="refcolumn"><blockquote class="refcontent"><p>Note: Assignments are not officially "released"
+until&#8212;<wbr></wbr>and are subject to change without notice up to&#8212;<wbr></wbr>the indicated
+"Out" date and time. If an assignment is posted early, students may
+look ahead but are responsible for ensuring that they are always
+working with the most recent version of the homework.</p></blockquote></blockquote></blockquote><p>This assignment begins to explore Turing Machines and the languages associated with them.</p><p><span class="Larger"><span style="font-weight: bold">Homework Problems</span></span></p><ol><li><p><a href="#%28part._hw9-notcfl%29" data-pltdoc="x">Not a Context-Free Language?</a> (22 points)</p></li><li><p><a href="#%28part._hw9-tr%29" data-pltdoc="x">A Turing-Recognizable Language Example</a> (22 points)</p></li><li><p><a href="#%28part._hw9-decidable%29" data-pltdoc="x">A Decidable Language</a> (22 points)</p></li><li><p>README (2 point)</p></li></ol><p><span style="font-weight: bold">Total</span>: 68 points</p><p><span class="Larger"><span style="font-weight: bold">Submitting</span></span></p><p><a href="policies.html#%28part._homework%29" data-pltdoc="x">Submit your solution</a> to this assignment in <a href="https://www.gradescope.com/courses/1382147/assignments/9048659">Gradescope <span class="stt">hw9</span></a>.
+Please assign each page to the correct problem and make sure your solutions are legible.</p><p>A submission must also include a <span class="stt">README</span> containing <a href="policies.html#%28part._homework%29" data-pltdoc="x">the required information</a>.</p><section class="SsectionLevel3" id="section 1"><h3 class="heading">1<span class="stt">&nbsp;</span><a name="(part._hw9-notcfl)"></a>Not a Context-Free Language?<span class="button-group"><a href="#(part._hw9-notcfl)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h3><p>Here is a language whose strings resemble simple Python programs.</p><p><span class="texMathDisplay">\mathit{REALPY}_{420} = \left\{\texttt{if:}\!\hookleftarrow\!\diamond^*\texttt{pr}\diamond 1\hookleftarrow\texttt{ei:}\!\hookleftarrow\!\diamond^*\texttt{pr}\diamond 2\hookleftarrow\texttt{el:}\!\hookleftarrow\!\diamond^*\texttt{pr}\diamond 3\mid\textrm{all}\diamond^*\textrm{must match}\right\}</span></p><p><span class="texMathInline">\Sigma = \left\{\texttt{if:},\texttt{ei:},\texttt{el:},\texttt{pr},\hookleftarrow,1,2,3,\diamond\right\}</span> (in real-world
+grammars, terminal (i.e., alphabet) "symbols" are often
+whole words)</p><ol><li><p>give 3 strings, made from the alphabet symbols, that are <span style="font-weight: bold">in the language</span></p></li><li><p>give 3 strings, made from the alphabet symbols, that are <span style="font-weight: bold">not in the language</span></p></li><li><p>Prove: <span style="font-weight: bold">NOT</span> <span class="texMathInline">\mathit{REALPY}_{420}</span> IS-A Context-free Language (CFL)</p></li></ol><p>For parts 1 and 2, you may post specific examples to Piazza and ask for confirmation about your understanding of the problem.</p><p>For Part 3, use the Pumping Lemma for CFLs and proof by contradiction. Make sure your proof
+has all the correct components and use the proper constructors.
+Remember that a proof by contradiction begins with assuming the opposite of the statement to prove
+and then proceeds like any normal proof, EXCEPT the proof must end in the statement <span style="font-weight: bold">Contradiction!</span>
+that is justified with a proof of some statement <span class="texMathInline">X \,\mathrm{AND}\, \textbf{NOT} X</span>
+This contradiction forces one to conclude that the assumption must be False and that the original statement to prove is True.</p><p>More specifically, the contradictory statements must be "<span class="texMathInline">s</span> IS-Pumpable" and "<span style="font-weight: bold">NOT</span> (<span class="texMathInline">s</span> IS-Pumpable)" where IS-Pumpable is defined by <span class="texMathInline">\mathrm{TheCFLPumpingLemma}</span> and <span class="texMathInline">s</span> is a counterexample that you must carefully choose that is in the language and longer than some "pumping length" <span class="texMathInline">p</span>, also specified by <span class="texMathInline">\mathrm{TheCFLPumpingLemma}</span>.</p><p><span class="emph">Interesting sidenote</span>: This problem is feels similar to the
+<a href="hw7.html#%28part._hw7-cfl%29" data-pltdoc="x">A Context-Free Language?</a> problem from <a href="hw7.html" data-pltdoc="x">Homework 7</a>. But there, the language
+was a CFL. Here, by making the language slightly more complicated, we
+now have a non-CFL language that cannot be recognized by PDAs or
+decribed by CFGs.</p></section><section class="SsectionLevel3" id="section 2"><h3 class="heading">2<span class="stt">&nbsp;</span><a name="(part._hw9-tr)"></a>A Turing-Recognizable Language Example<span class="button-group"><a href="#(part._hw9-tr)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h3><p>The <a href="#%28part._hw9-notcfl%29" data-pltdoc="x">Not a Context-Free Language?</a> Problem above asked you to prove that
+<span class="texMathInline">\mathit{REALPY}_{420}</span> is not a CFL.</p><p>Now prove : <span class="texMathInline">\mathit{REALPY}_{420}</span> IS-A <span style="font-weight: bold">Turing-recognizable</span> Language</p><p>Any Turing Machine you create should be a high-level description that
+follows the required format.</p><p>In addition, the criteria to show that a Turing machine recognizes
+some language is to give <span style="font-weight: bold">three</span> example strings that are both
+accepted by the machine and in the language, and <span style="font-weight: bold">three</span> examples
+that are both not accepted by the machine and not in the language, in
+an Examples Table.</p></section><section class="SsectionLevel3" id="section 3"><h3 class="heading">3<span class="stt">&nbsp;</span><a name="(part._hw9-decidable)"></a>A Decidable Language<span class="button-group"><a href="#(part._hw9-decidable)" class="heading-anchor" title="Link to here">🔗</a><span style="visibility: hidden"> </span></span></h3><p>Recall the following language from the <a href="hw2.html#%28part._hw2-reglang2%29" data-pltdoc="x">Is It A Regular Language?</a> problem from <a href="hw2.html" data-pltdoc="x">Homework 2</a>.</p><p><span class="texMathDisplay">L_{grad} = \{w\mid w\textrm{ is a valid UMB CS grad course number}\}</span></p><p>Prove: <span class="texMathInline">L_{grad}</span> IS-A <span style="font-weight: bold">Decidable</span> Language</p><p>You may assume that strings in the language contain only
+characters from alphabet <span class="texMathInline">\{\texttt{0},\texttt{2},\texttt{4},\texttt{6}\}</span>, and that valid UMB CS grad courses
+are any three digit number starting with <span class="texMathInline">\texttt{6}</span> made from alphabet characters.</p><p>If your answer involves a decider, its definition must include a
+<span style="font-weight: bold">termination argument</span>.</p><p>Also, for this problem, the decider <span class="emph">must</span> use <span style="font-weight: bold">at least one</span>
+machine we have previously defined in lecture or homework. (Remember
+that when creating new Turing machines, all other machines or
+algorithms previously constructed in class or in previous homeworks
+are available as a "library"!)</p><p>Finally, make sure your proof includes the necessary proof
+constructors and Examples Table with the appropriate columns (e.g.,
+whether strings are in the language, whether strings are accepted by
+the decider, existing machines used, etc.).</p></section></section><div class="navsetbottom"><span class="navleft"><div class="nosearchform"></div>&nbsp;&nbsp;<span class="tocsettoggle">&nbsp;&nbsp;<a href="javascript:void(0);" title="show/hide table of contents" onclick="TocsetToggle();">contents</a></span></span><span class="navright">&nbsp;&nbsp;<a href="hw8.html" title="backward to &quot;Homework 8&quot;" data-pltdoc="x" rel="prev">&larr; prev</a>&nbsp;&nbsp;<a href="index.html" title="up to &quot;CS420 : Intro to Theory of Computation&quot;" data-pltdoc="x">up</a>&nbsp;&nbsp;<span class="nonavigation">next &rarr;</span></span>&nbsp;</div></div></div><div id="contextindicator">&nbsp;</div></body></html>
